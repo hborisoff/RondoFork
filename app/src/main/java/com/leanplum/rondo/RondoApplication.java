@@ -15,6 +15,6 @@ public class RondoApplication extends Application {
 
         Leanplum.setApplicationContext(this);
         Parser.parseVariables(this);
-//        LeanplumActivityHelper.enableLifecycleCallbacks(this);
+        LeanplumActivityHelper.enableLifecycleCallbacks(this);
     }
 }

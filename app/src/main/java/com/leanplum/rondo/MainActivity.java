@@ -1,11 +1,13 @@
 package com.leanplum.rondo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.dx.command.Main;
 import com.leanplum.Leanplum;
 import com.leanplum.callbacks.StartCallback;
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         createEventTriggerButton();
         createStateTriggerButton();
         createUserAttributeChangeButton();
+        createAppInboxButton();
     }
 
     private void initLeanplum() {
@@ -68,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
                 Map attrib = new HashMap();
                 attrib.put("age", Double.toString(Math.random()));
                 Leanplum.setUserAttributes(attrib);
+            }
+        });
+    }
+
+    private void createAppInboxButton() {
+        Button button = (Button) findViewById(R.id.appInbox);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, AppInboxActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
         });
     }

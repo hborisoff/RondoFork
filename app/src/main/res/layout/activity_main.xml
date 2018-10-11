@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:text="Event: testEvent"
             android:textSize="14dp"
-            android:textStyle="bold"
             />
         <Button
             android:id="@+id/triggerState"
@@ -24,7 +23,6 @@
             android:layout_height="wrap_content"
             android:text="State: testState"
             android:textSize="14dp"
-            android:textStyle="bold"
             />
         <Button
             android:id="@+id/userAttributeChange"
@@ -32,7 +30,13 @@
             android:layout_height="wrap_content"
             android:text="userAttributeChange"
             android:textSize="14dp"
-            android:textStyle="bold"
+            />
+        <Button
+            android:id="@+id/appInbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App Inbox"
+            android:textSize="14dp"
             />
 
     </LinearLayout>
