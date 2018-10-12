@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         }
         Parser.parseVariablesForClasses(VariablesActivity.class);
 
-        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
+        // Enable for GCM
+//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
         Leanplum.start(this);
     }

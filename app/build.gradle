@@ -29,11 +29,13 @@ dependencies {
     implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
     implementation "com.google.android.gms:play-services-location:11.8+"
 
-//    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-//    implementation 'com.google.firebase:firebase-messaging:16.0.0+'
+    // Enable for FCM
+    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+    implementation 'com.google.firebase:firebase-messaging:17.3.3'
 
-    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
-    implementation "com.google.android.gms:play-services-gcm:11.8+" // Use Google's GCM library.
+    // Enable for GCM
+//    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+//    implementation "com.google.android.gms:play-services-gcm:11.8+" // Use Google's GCM library.
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
