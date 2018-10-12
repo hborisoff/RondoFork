@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initLeanplum();
-        createEventTriggerButton();
-        createStateTriggerButton();
-        createUserAttributeChangeButton();
+        createTriggersButton();
         createAppInboxButton();
         createVariablesButton();
     }
@@ -47,40 +45,20 @@ public class MainActivity extends AppCompatActivity {
         Leanplum.start(this);
     }
 
-    private void createEventTriggerButton() {
-        Button button = (Button) findViewById(R.id.triggerEvent);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Leanplum.track("testEvent");
-            }
-        });
-    }
 
-    private void createStateTriggerButton() {
-        Button button = (Button) findViewById(R.id.triggerState);
+    private void createTriggersButton() {
+        Button button = findViewById(R.id.triggers);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.advanceTo("testState");
-            }
-        });
-    }
-
-    private void createUserAttributeChangeButton() {
-        Button button = (Button) findViewById(R.id.userAttributeChange);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Map attrib = new HashMap();
-                attrib.put("age", Double.toString(Math.random()));
-                Leanplum.setUserAttributes(attrib);
+                Intent myIntent = new Intent(MainActivity.this, TriggersActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
         });
     }
 
     private void createAppInboxButton() {
-        Button button = (Button) findViewById(R.id.appInbox);
+        Button button = findViewById(R.id.appInbox);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

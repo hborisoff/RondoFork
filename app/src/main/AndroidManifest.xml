@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AppInboxActivity" />
-        <activity android:name=".VariablesActivity"></activity>
+        <activity android:name=".VariablesActivity" />
+        <activity android:name=".TriggersActivity"></activity>
     </application>
 
 </manifest>

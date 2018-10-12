@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TriggersActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/triggerEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event: testEvent"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/triggerState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State: testState"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/userAttributeChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userAttributeChange"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/sessionLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This should work 3 times per session"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/lifetimeLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This should work 3 times per lifetime"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/chainInApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chained to in app"
+            android:textSize="14dp"
+            />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

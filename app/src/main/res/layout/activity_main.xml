@@ -11,24 +11,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <Button
-            android:id="@+id/triggerEvent"
+            android:id="@+id/triggers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Event: testEvent"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/triggerState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="State: testState"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/userAttributeChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="userAttributeChange"
+            android:text="Triggers"
             android:textSize="14dp"
             />
         <Button
