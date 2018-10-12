@@ -26,7 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AppInboxActivity"></activity>
+        <activity android:name=".AppInboxActivity" />
+        <activity android:name=".VariablesActivity"></activity>
     </application>
 
 </manifest>

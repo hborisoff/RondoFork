@@ -4,46 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".VariablesActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/triggerEvent"
+        <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Event: testEvent"
             android:textSize="14dp"
             />
-        <Button
-            android:id="@+id/triggerState"
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="State: testState"
             android:textSize="14dp"
             />
-        <Button
-            android:id="@+id/userAttributeChange"
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="userAttributeChange"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/appInbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="App Inbox"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/variables"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Variables"
-            android:textSize="14dp"
             />
     </LinearLayout>
 

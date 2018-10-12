@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.android.dx.command.Main;
 import com.leanplum.Leanplum;
+import com.leanplum.annotations.Parser;
 import com.leanplum.callbacks.StartCallback;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         createStateTriggerButton();
         createUserAttributeChangeButton();
         createAppInboxButton();
+        createVariablesButton();
     }
 
     private void initLeanplum() {
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Leanplum.setAppIdForProductionMode(appId, prodKey);
         }
+        Parser.parseVariablesForClasses(VariablesActivity.class);
+
         Leanplum.start(this);
     }
 
@@ -86,5 +90,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void createVariablesButton() {
+        Button button = findViewById(R.id.variables);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, VariablesActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
 
 }

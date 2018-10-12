@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -26,6 +29,7 @@ public class AppInboxActivity extends AppCompatActivity {
         LeanplumInbox inbox = Leanplum.getInbox();
         for (LeanplumInboxMessage message : inbox.allMessages()) {
             createTableRow(message.getTitle(), message.getSubtitle(), message.getImageFilePath());
+            message.read(); //todo; abstract
         }
 
     }
@@ -52,6 +56,20 @@ public class AppInboxActivity extends AppCompatActivity {
         }
         tl.addView(titleView);
         tl.addView(subtitleView);
+
+        Button bt = new Button(this);
+        bt.setText("A Button");
+        bt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        tl.addView(bt);
+
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
 }
