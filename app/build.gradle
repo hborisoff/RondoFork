@@ -23,16 +23,17 @@ def LEANPLUM_SDK_VERSION = "4.2.0-beta.1"
 dependencies {
     implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
     implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-
-    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
 
     implementation "com.leanplum:leanplum-monitoring:+"
 
-    implementation "com.leanplum:leanplum-uieditor:${LEANPLUM_SDK_VERSION}"
+    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
+    implementation "com.google.android.gms:play-services-location:11.8+"
 
-//    implementation 'com.google.android.gms:play-services-location:16.0.0+'
-    implementation 'com.google.firebase:firebase-messaging:11.6.2'
+//    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+//    implementation 'com.google.firebase:firebase-messaging:16.0.0+'
+
+    implementation "com.leanplum:leanplum-gcm:${LEANPLUM_SDK_VERSION}"
+    implementation "com.google.android.gms:play-services-gcm:11.8+" // Use Google's GCM library.
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
