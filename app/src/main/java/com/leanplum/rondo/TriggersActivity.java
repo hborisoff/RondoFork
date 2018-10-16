@@ -22,6 +22,7 @@ public class TriggersActivity extends AppCompatActivity {
         createUserAttributeChangeButton();
         createSessionLimitButton();
         createLifetimeLimitButton();
+        createChainedIAMButton();
     }
 
     private void createEventTriggerButton() {
@@ -76,12 +77,12 @@ public class TriggersActivity extends AppCompatActivity {
         });
     }
 
-    private void createChainedButton() {
+    private void createChainedIAMButton() {
         Button button = findViewById(R.id.chainInApp);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Leanplum.advanceTo("chainedInApp");
+                Leanplum.track("chainedInApp");
             }
         });
     }

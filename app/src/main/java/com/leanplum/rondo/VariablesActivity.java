@@ -32,7 +32,7 @@ public class VariablesActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.title);
         title.setText(compositionTitle.stringValue);
 
-        if (photoFile .fileValue()!= null) {
+        if (photoFile.fileValue()!= null) {
             java.io.File imgFile = new java.io.File(photoFile.fileValue());
             if(imgFile.exists()) {
                 ImageView myImage = findViewById(R.id.image);

@@ -1,6 +1,11 @@
 package com.leanplum.rondo;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +26,39 @@ public class MainActivity extends AppCompatActivity {
         createTriggersButton();
         createAppInboxButton();
         createVariablesButton();
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+    }
+
+    private static final String PERMISSION = "android.permission.ACCESS_FINE_LOCATION";
+    private static final String METADATA = "com.google.android.gms.version";
+
+    private boolean isPermissionGranted() {
+        Context context = Leanplum.getContext();
+        try {
+            return context.checkCallingOrSelfPermission(PERMISSION) == PackageManager.PERMISSION_GRANTED;
+        } catch (RuntimeException ignored) {
+            return false;
+        }
+    }
+
+    private boolean isMetaDataSet() {
+        Context context = Leanplum.getContext();
+        try {
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
+                    context.getPackageName(), PackageManager.GET_META_DATA);
+            if (appInfo != null) {
+                if (appInfo.metaData != null) {
+                    Object value = appInfo.metaData.get(METADATA);
+                    if (value != null) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     private void initLeanplum() {
