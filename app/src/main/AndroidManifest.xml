@@ -3,14 +3,12 @@
     package="com.leanplum.rondo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
     <application
         android:name=".RondoApplication"
@@ -34,20 +32,24 @@
         </activity>
         <activity android:name=".AppInboxActivity" />
         <activity android:name=".VariablesActivity" />
-        <activity android:name=".TriggersActivity"></activity>
+        <activity android:name=".TriggersActivity" />
+
         <receiver
             android:name="com.leanplum.LeanplumPushReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.leanplum.LeanplumPushListenerService" />
+
                 <category android:name="com.leanplum.rondo" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.leanplum.LeanplumPushListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.leanplum.rondo" />
             </intent-filter>
         </service>
@@ -56,14 +58,22 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
+
                 <category android:name="com.leanplum.rondo" />
             </intent-filter>
         </service>
         <service
             android:name="com.leanplum.LeanplumPushRegistrationService"
-            android:exported="false">
-        </service>
+            android:exported="false" />
 
+        <activity
+            android:name=".MessagesActivity"
+            android:label="@string/title_activity_messages"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PushActivity"
+            android:label="@string/title_activity_push"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

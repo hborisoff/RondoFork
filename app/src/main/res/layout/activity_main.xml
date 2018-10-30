@@ -68,6 +68,20 @@
             android:text="Variables"
             android:textSize="14dp"
             />
+        <Button
+            android:id="@+id/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Messages"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/push"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Push"
+            android:textSize="14dp"
+            />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -19,14 +19,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
         populateVersionURLInfo();
 
         initLeanplum();
         createTriggersButton();
         createAppInboxButton();
         createVariablesButton();
-
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        createMessagesButton();
+        createPushButton();
     }
 
     private void populateVersionURLInfo() {
@@ -85,6 +87,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, VariablesActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
+    private void createMessagesButton() {
+        Button button = findViewById(R.id.messages);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, MessagesActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
+    private void createPushButton() {
+        Button button = findViewById(R.id.push);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, PushActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
