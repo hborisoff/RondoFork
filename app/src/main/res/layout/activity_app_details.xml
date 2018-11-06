@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Application Keys"
+            android:textColor="@color/colorPrimaryDark"
+            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/appIdLabel"
+                android:textSize="14dp"
+                android:text="App ID:"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/appId"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/devKeyLabel"
+                android:textSize="14dp"
+                android:text="Dev Key:"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/devKey"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/prodKeyLabel"
+                android:textSize="14dp"
+                android:text="Prod Key:"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/prodKey"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="User &amp; Device Settings"
+            android:paddingTop="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/userIdLabel"
+                android:textSize="14dp"
+                android:text="User ID:"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/userId"
+                android:textSize="14dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/deviceIdLabel"
+                android:textSize="14dp"
+                android:text="Device ID:"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/deviceId"
+                android:textSize="14dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="API Settings"
+            android:paddingTop="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/sdkVersionLabel"
+                android:textSize="14dp"
+                android:text="SDK Version:"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/sdkVersion"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/apiHostNameLabel"
+                android:textSize="14dp"
+                android:text="API Host:"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/apiHostName"
+                android:textSize="14dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/apiSSLLabel"
+                android:textSize="14dp"
+                android:text="API SSL:"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:textSize="14dp"
+                android:id="@+id/apiSSL"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/socketHostNameLabel"
+                android:textSize="14dp"
+                android:text="Socket Host:"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/socketHostName"
+                android:textSize="14dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/socketPortLabel"
+                android:textSize="14dp"
+                android:text="Socket Port:"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp"
+                android:gravity="right"/>
+            <TextView
+                android:id="@+id/socketPort"
+                android:textSize="14dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

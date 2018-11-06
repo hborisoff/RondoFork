@@ -20,6 +20,7 @@
                 android:layout_height="wrap_content"
                 android:text="SDK Version: "
                 android:textSize="14dp"
+                android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
                 android:id="@+id/sdkVersion"
@@ -38,9 +39,10 @@
                 android:layout_height="wrap_content"
                 android:text="API URL: "
                 android:textSize="14dp"
+                android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
-                android:id="@+id/apiURL"
+                android:id="@+id/apiHostName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
@@ -80,6 +82,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Push"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/appDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App Details"
+            android:textSize="14dp"
+            />
+        <Button
+            android:id="@+id/adhoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adhoc"
             android:textSize="14dp"
             />
     </LinearLayout>
