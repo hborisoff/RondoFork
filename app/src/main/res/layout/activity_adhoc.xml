@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Send Track Event"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <EditText
+                android:id="@+id/trackName"
+                android:layout_height="wrap_content"
+                android:hint="Event Name (String)"
+                android:inputType="textNoSuggestions"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </EditText>
+            <Button
+                android:id="@+id/buttonTrack"
+                android:layout_height="wrap_content"
+                android:text="Send Track Event"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Set Session State"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <EditText
+                android:id="@+id/stateName"
+                android:layout_height="wrap_content"
+                android:hint="State Name (String)"
+                android:inputType="textNoSuggestions"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </EditText>
+            <Button
+                android:id="@+id/buttonState"
+                android:layout_height="wrap_content"
+                android:text="Send Session State"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Set User Attribute"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <EditText
+                android:id="@+id/attrKey"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="Key (String)"
+                android:inputType="textNoSuggestions"
+                android:textSize="16dp">
+            </EditText>
+            <EditText
+                android:id="@+id/attrValue"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="Value (String)"
+                android:inputType="textNoSuggestions"
+                android:textSize="16dp">
+            </EditText>
+            <Button
+                android:id="@+id/buttonUserAttr"
+                android:layout_height="wrap_content"
+                android:text="Send User Attribute"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Set Device Location"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <EditText
+                android:id="@+id/locLatitude"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:hint="Latitude"
+                android:textSize="16dp">
+            </EditText>
+            <EditText
+                android:id="@+id/locLongitude"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:hint="Longitude"
+                android:textSize="16dp">
+            </EditText>
+            <Button
+                android:id="@+id/buttonDeviceLocation"
+                android:layout_height="wrap_content"
+                android:text="Set Device Location"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>
+        <!--
+          **this SHOULD work, if it wasn't for some random version mismatch...
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Set Device Location"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <Button
+                android:id="@+id/buttonPlacePicker"
+                android:layout_height="wrap_content"
+                android:text="Choose Device Location"
+                android:layout_width="fill_parent"
+                android:textSize="16dp">
+            </Button>
+        </LinearLayout>-->
+    </LinearLayout>
+</ScrollView>

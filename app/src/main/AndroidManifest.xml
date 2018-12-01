@@ -74,6 +74,16 @@
             android:name=".PushActivity"
             android:label="@string/title_activity_push"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AppDetailsActivity"
+            android:label="AppDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AdhocActivity"
+            android:label="AdhocActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="SOME_GOOGLE_API_KEY_HERE"/>
 </manifest>
