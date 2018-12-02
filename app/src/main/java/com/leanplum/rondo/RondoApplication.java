@@ -15,17 +15,17 @@ public class RondoApplication extends Application {
      * Add your SDK version and API/Socket settings here
      */
     private String sdkVersion = "4.2";
-    private String apiHostName = "leanplum-qa-1372.appspot.com";
+    private String apiHostName = "api.leanplum.com";
     private Boolean apiSSL = true;
-    private String socketHostName = "dev-qa.leanplum.com";
-    private int socketPort = 80;
+    private String socketHostName = "dev.leanplum.com";
+    private int socketPort = 443;
 
     /**
      * Insert your API keys here.
      */
-    private String appId = "app_7AQjDdQHfMaPAohBQP2QoCj8tLfxRMmt6VPNht4DUsU";
-    private String devKey = "dev_JxVMcJSqyWAyLZw9cB9m90NqTmgxmWnLWQH3X1qXySg";
-    private String prodKey = "prod_aYkcw8AA9AYbQCQWiNgUV1EiDvseN7ZAoB1SNxKnphw";
+    private String appId = "app_ve9UCNlqI8dy6Omzfu1rEh6hkWonNHVZJIWtLLt6aLs";
+    private String devKey = "dev_cKF5HMpLGqhbovlEGMKjgTuf8AHfr2Jar6rrnNhtzQ0";
+    private String prodKey = "prod_D5ECYBLrRrrOYaFZvAFFHTg1JyZ2Llixe5s077Lw3rM";
 
     /**
      * Update user info here
