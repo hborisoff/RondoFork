@@ -42,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateVersionURLInfo() {
         InternalState state = InternalState.sharedState();
+        LeanplumApp app = state.getApp();
         LeanplumEnvironment env = state.getEnv();
 
         TextView tv = findViewById(R.id.sdkVersion);
         tv.setText(BuildConfig.LEANPLUM_SDK_VERSION);
+
+        TextView tv1 = findViewById(R.id.appName);
+        tv1.setText(app.getDisplayName());
 
         TextView apiUrl = findViewById(R.id.apiHostName);
         apiUrl.setText(env.getApiHostName());
@@ -88,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void createTriggersButton() {
         Button button = findViewById(R.id.triggers);
         button.setOnClickListener(new View.OnClickListener() {

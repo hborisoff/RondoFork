@@ -27,7 +27,7 @@ public class LeanplumAppAdapter extends ArrayAdapter<LeanplumApp> {
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.name);
-        name.setText(app.getAppId());
+        name.setText(app.getDisplayName());
         return convertView;
     }
 }
