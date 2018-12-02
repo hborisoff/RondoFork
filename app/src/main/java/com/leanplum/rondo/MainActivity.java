@@ -7,10 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.Places;
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
@@ -18,7 +15,6 @@ import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnvironment;
 
 public class MainActivity extends AppCompatActivity {
-    protected GeoDataClient mGeoDataClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        populateVersionURLInfo();
 
         setUpAppState();
 
@@ -45,15 +39,6 @@ public class MainActivity extends AppCompatActivity {
         InternalState state = InternalState.sharedState();
         state.app = LeanplumApp.rondoQAProduction();
         state.env = LeanplumEnvironment.production();
-    }
-
-    private void populateVersionURLInfo() {
-
-        TextView tv = findViewById(R.id.sdkVersion);
-//        tv.setText(app.getSdkVersion());
-
-        TextView apiUrl = findViewById(R.id.apiHostName);
-//        apiUrl.setText(app.getApiHostName());
     }
 
     private void initLeanplum() {
@@ -76,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
         Leanplum.start(this);
-//        Leanplum.setUserId(app.getUsername());
     }
 
 
