@@ -7,8 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.leanplum.Leanplum;
+import com.leanplum.rondo.models.InternalState;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -65,11 +67,12 @@ public class PushActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String url = "https://www.leanplum.com/api?action=addAndroidNotificationChannel\n";
                 final Map<String, String> params = new HashMap<>();
-                params.put("appId", "app_ve9UCNlqI8dy6Omzfu1rEh6hkWonNHVZJIWtLLt6aLs");
-                params.put("clientKey", "dev_cKF5HMpLGqhbovlEGMKjgTuf8AHfr2Jar6rrnNhtzQ0");
+                InternalState state = InternalState.sharedState();
+                params.put("appId", state.app.getAppId());
+                params.put("clientKey", state.app.getDevKey());
                 params.put("apiVersion", "1.0.6");
                 params.put("id", "123");
-                params.put("name", "createdChannel");
+                params.put("name", "rondo-channel");
                 params.put("importance", "3");
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -85,7 +88,7 @@ public class PushActivity extends AppCompatActivity {
             }
         });
     }
-    public String  performPostCall(String requestURL, Map<String, String> postDataParams) {
+    public String performPostCall(String requestURL, Map<String, String> postDataParams) {
         URL url;
         String response = "";
         try {
@@ -110,6 +113,8 @@ public class PushActivity extends AppCompatActivity {
             int responseCode=conn.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
+                Toast.makeText(this, "Success!",
+                        Toast.LENGTH_LONG).show();
                 String line;
                 BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 while ((line=br.readLine()) != null) {
@@ -117,10 +122,13 @@ public class PushActivity extends AppCompatActivity {
                 }
             }
             else {
+                Toast.makeText(this, "Error!",
+                        Toast.LENGTH_LONG).show();
                 response="";
-
             }
         } catch (Exception e) {
+            Toast.makeText(this, "Error!",
+                    Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
