@@ -13,9 +13,11 @@ import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
+import com.leanplum.rondo.models.InternalState;
+import com.leanplum.rondo.models.LeanplumApp;
+import com.leanplum.rondo.models.LeanplumEnvironment;
 
 public class MainActivity extends AppCompatActivity {
-
     protected GeoDataClient mGeoDataClient;
 
     @Override
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         populateVersionURLInfo();
 
+        setUpAppState();
+
         initLeanplum();
         createTriggersButton();
         createAppInboxButton();
@@ -37,32 +41,42 @@ public class MainActivity extends AppCompatActivity {
         createAdhocButton();
     }
 
+    private void setUpAppState() {
+        InternalState state = InternalState.sharedState();
+        state.app = LeanplumApp.rondoQAProduction();
+        state.env = LeanplumEnvironment.production();
+    }
+
     private void populateVersionURLInfo() {
-        RondoApplication app = (RondoApplication) this.getApplication();
 
         TextView tv = findViewById(R.id.sdkVersion);
-        tv.setText(app.getSdkVersion());
+//        tv.setText(app.getSdkVersion());
 
         TextView apiUrl = findViewById(R.id.apiHostName);
-        apiUrl.setText(app.getApiHostName());
+//        apiUrl.setText(app.getApiHostName());
     }
 
     private void initLeanplum() {
-        RondoApplication app = (RondoApplication) this.getApplication();
+        InternalState state = InternalState.sharedState();
+
+        LeanplumApp app = state.app;
 
         Leanplum.setAppIdForDevelopmentMode(
             app.getAppId(),
             BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
         );
-        Leanplum.setSocketConnectionSettings(app.getSocketHostName(), app.getSocketPort());
-        Leanplum.setApiConnectionSettings(app.getApiHostName(), "api", app.getApiSSL());
+
+        LeanplumEnvironment env = state.env;
+
+        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
+        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
         Parser.parseVariablesForClasses(VariablesActivity.class);
 
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
         Leanplum.start(this);
-        Leanplum.setUserId(app.getUsername());
+//        Leanplum.setUserId(app.getUsername());
     }
 
 
