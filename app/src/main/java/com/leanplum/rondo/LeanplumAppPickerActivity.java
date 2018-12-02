@@ -1,14 +1,17 @@
 package com.leanplum.rondo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
+import com.leanplum.rondo.models.LeanplumEnvironment;
 
 import java.util.ArrayList;
 
@@ -40,5 +43,19 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
             }
 
         });
+
+        createButton();
     }
+
+    private void createButton() {
+        Button button = findViewById(R.id.create);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LeanplumAppPickerActivity.this, AppCreateActivity.class);
+                LeanplumAppPickerActivity.this.startActivity(myIntent);
+            }
+        });
+    }
+
 }

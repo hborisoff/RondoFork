@@ -90,6 +90,10 @@
             android:name=".LeanplumEnvPickerActivity"
             android:label="@string/title_activity_push"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AppCreateActivity"
+            android:label="@string/title_activity_push"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
     <meta-data
