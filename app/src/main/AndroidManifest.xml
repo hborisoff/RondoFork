@@ -75,7 +75,7 @@
             android:label="@string/title_activity_push"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".AppDetailsActivity"
+            android:name=".AppSetupActivity"
             android:label="AppDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

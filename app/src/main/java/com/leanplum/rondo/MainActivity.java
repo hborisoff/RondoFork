@@ -25,19 +25,21 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         setUpAppState();
-        populateVersionURLInfo();
-
         initLeanplum();
-        createStartButton();
+
         createTriggersButton();
         createAppInboxButton();
         createVariablesButton();
         createMessagesButton();
         createPushButton();
-        createAppDetailsButton();
+        createAppSetupButton();
         createAdhocButton();
-        createAppPickerButton();
-        createEnvPickerButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateVersionURLInfo();
     }
 
     private void populateVersionURLInfo() {
@@ -81,16 +83,6 @@ public class MainActivity extends AppCompatActivity {
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
         Leanplum.start(this);
-    }
-
-    private void createStartButton() {
-        Button button = findViewById(R.id.call_start);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initLeanplum();
-            }
-        });
     }
 
     private void createTriggersButton() {
@@ -148,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void createAppDetailsButton() {
-        Button button = findViewById(R.id.appDetails);
+    private void createAppSetupButton() {
+        Button button = findViewById(R.id.appSetup);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, AppDetailsActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, AppSetupActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
@@ -165,27 +157,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, AdhocActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createAppPickerButton() {
-        Button button = findViewById(R.id.app_picker);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, LeanplumAppPickerActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-    private void createEnvPickerButton() {
-        Button button = findViewById(R.id.env_picker);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, LeanplumEnvPickerActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
