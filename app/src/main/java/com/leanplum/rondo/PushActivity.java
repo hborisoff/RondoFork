@@ -68,8 +68,8 @@ public class PushActivity extends AppCompatActivity {
                 final String url = "https://www.leanplum.com/api?action=addAndroidNotificationChannel\n";
                 final Map<String, String> params = new HashMap<>();
                 InternalState state = InternalState.sharedState();
-                params.put("appId", state.app.getAppId());
-                params.put("clientKey", state.app.getDevKey());
+                params.put("appId", state.getApp().getAppId());
+                params.put("clientKey", state.getApp().getDevKey());
                 params.put("apiVersion", "1.0.6");
                 params.put("id", "123");
                 params.put("name", "rondo-channel");

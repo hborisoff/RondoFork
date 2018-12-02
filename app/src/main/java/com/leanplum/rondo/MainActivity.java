@@ -33,25 +33,27 @@ public class MainActivity extends AppCompatActivity {
         createPushButton();
         createAppDetailsButton();
         createAdhocButton();
+        createAppPickerButton();
+        createEnvPickerButton();
     }
 
     private void setUpAppState() {
         InternalState state = InternalState.sharedState();
-        state.app = LeanplumApp.rondoQAProduction();
-        state.env = LeanplumEnvironment.production();
+        state.setApp(LeanplumApp.rondoQAProduction());
+        state.setEnv(LeanplumEnvironment.production());
     }
 
     private void initLeanplum() {
         InternalState state = InternalState.sharedState();
 
-        LeanplumApp app = state.app;
+        LeanplumApp app = state.getApp();
 
         Leanplum.setAppIdForDevelopmentMode(
             app.getAppId(),
             BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
         );
 
-        LeanplumEnvironment env = state.env;
+        LeanplumEnvironment env = state.getEnv();
 
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
@@ -136,6 +138,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, AdhocActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
+
+    private void createAppPickerButton() {
+        Button button = findViewById(R.id.app_picker);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, LeanplumAppPickerActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+    }
+    private void createEnvPickerButton() {
+        Button button = findViewById(R.id.env_picker);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, LeanplumEnvPickerActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

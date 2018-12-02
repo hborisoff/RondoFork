@@ -17,8 +17,8 @@ public class AppDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_app_details);
 
         InternalState state = InternalState.sharedState();
-        LeanplumApp app = state.app;
-        LeanplumEnvironment env = state.env;
+        LeanplumApp app = state.getApp();
+        LeanplumEnvironment env = state.getEnv();
 
         ((TextView)findViewById(R.id.appId)).setText(app.getAppId());
         ((TextView)findViewById(R.id.devKey)).setText(app.getDevKey());

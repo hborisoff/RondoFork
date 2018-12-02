@@ -82,6 +82,15 @@
             android:name=".AdhocActivity"
             android:label="AdhocActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".LeanplumAppPickerActivity"
+            android:label="@string/title_activity_push"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".LeanplumEnvPickerActivity"
+            android:label="@string/title_activity_push"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
     <meta-data
         android:name="com.google.android.geo.API_KEY"
