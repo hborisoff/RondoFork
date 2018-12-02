@@ -35,6 +35,7 @@ public class AppCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LeanplumApp app = createApp();
+                finish();
             }
         });
     }

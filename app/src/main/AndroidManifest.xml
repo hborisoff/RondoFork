@@ -34,9 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AppInboxActivity" />
-        <activity android:name=".VariablesActivity" />
-        <activity android:name=".TriggersActivity" />
 
         <receiver
             android:name="com.leanplum.LeanplumPushReceiver"
@@ -71,36 +68,29 @@
             android:exported="false" />
 
         <activity
+            android:name=".AppInboxActivity"
+            android:label="App Inbox"/>
+        <activity
+            android:name=".VariablesActivity"
+            android:label="Variables"/>
+        <activity
+            android:name=".TriggersActivity"
+            android:label="Triggers"/>
+        <activity
             android:name=".MessagesActivity"
-            android:label="@string/title_activity_messages"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="In App Messages"/>
         <activity
             android:name=".PushActivity"
-            android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AppSetupActivity"
-            android:label="AppDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AdhocFragment"
-            android:label="AdhocActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Push Notifications"/>
         <activity
             android:name=".LeanplumAppPickerActivity"
-            android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Pick App"/>
         <activity
             android:name=".LeanplumEnvPickerActivity"
-            android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Pick Env"/>
         <activity
             android:name=".AppCreateActivity"
-            android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!--<activity-->
-            <!--android:name=".MainActivity"-->
-            <!--android:label="@string/title_activity_main2"></activity>-->
+            android:label="Create App"/>
     </application>
 
 </manifest>
