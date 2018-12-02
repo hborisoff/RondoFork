@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def LEANPLUM_SDK_VERSION = "4.2.0"
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -16,6 +18,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        buildTypes.each {
+            it.buildConfigField "String", "LEANPLUM_SDK_VERSION", "\"${LEANPLUM_SDK_VERSION}\""
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -24,8 +30,6 @@ android {
         abortOnError false
     }
 }
-
-def LEANPLUM_SDK_VERSION = "4.2.0"
 
 dependencies {
     implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"

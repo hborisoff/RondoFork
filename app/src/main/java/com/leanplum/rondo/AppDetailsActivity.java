@@ -27,7 +27,7 @@ public class AppDetailsActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.userId)).setText(Leanplum.getUserId());
         ((TextView)findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
 
-//        ((TextView)findViewById(R.id.sdkVersion)).setText(env.getSdkVersion());
+        ((TextView)findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
         ((TextView)findViewById(R.id.apiHostName)).setText(env.getApiHostName());
         ((TextView)findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
         ((TextView)findViewById(R.id.socketHostName)).setText(env.getSocketHostName());

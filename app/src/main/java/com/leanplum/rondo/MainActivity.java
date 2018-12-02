@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         setUpAppState();
+        populateVersionURLInfo();
 
         initLeanplum();
         createTriggersButton();
@@ -35,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
         createAdhocButton();
         createAppPickerButton();
         createEnvPickerButton();
+    }
+
+    private void populateVersionURLInfo() {
+        InternalState state = InternalState.sharedState();
+        LeanplumEnvironment env = state.getEnv();
+
+        TextView tv = findViewById(R.id.sdkVersion);
+        tv.setText(BuildConfig.LEANPLUM_SDK_VERSION);
+
+        TextView apiUrl = findViewById(R.id.apiHostName);
+        apiUrl.setText(env.getApiHostName());
     }
 
     private void setUpAppState() {
