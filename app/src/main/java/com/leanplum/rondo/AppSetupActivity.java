@@ -2,8 +2,10 @@ package com.leanplum.rondo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,47 +15,52 @@ import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnvironment;
 
-public class AppSetupActivity extends AppCompatActivity {
+public class AppSetupActivity extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_setup);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_app_setup, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         createStartButton();
         createAppPickerButton();
         createEnvPickerButton();
     }
 
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         populateAppDetails();
     }
 
     private void createAppPickerButton() {
-        Button button = findViewById(R.id.app_picker);
+        Button button = getView().findViewById(R.id.app_picker);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(AppSetupActivity.this, LeanplumAppPickerActivity.class);
+                Intent myIntent = new Intent(getActivity(), LeanplumAppPickerActivity.class);
                 AppSetupActivity.this.startActivity(myIntent);
             }
         });
     }
     private void createEnvPickerButton() {
-        Button button = findViewById(R.id.env_picker);
+        Button button = getView().findViewById(R.id.env_picker);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(AppSetupActivity.this, LeanplumEnvPickerActivity.class);
+                Intent myIntent = new Intent(getActivity(), LeanplumEnvPickerActivity.class);
                 AppSetupActivity.this.startActivity(myIntent);
             }
         });
     }
 
     private void createStartButton() {
-        Button button = findViewById(R.id.call_start);
+        Button button = getView().findViewById(R.id.call_start);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,18 +75,18 @@ public class AppSetupActivity extends AppCompatActivity {
         LeanplumApp app = state.getApp();
         LeanplumEnvironment env = state.getEnv();
 
-        ((TextView)findViewById(R.id.appId)).setText(app.getAppId());
-        ((TextView)findViewById(R.id.devKey)).setText(app.getDevKey());
-        ((TextView)findViewById(R.id.prodKey)).setText(app.getProdKey());
+        ((TextView)getView().findViewById(R.id.appId)).setText(app.getAppId());
+        ((TextView)getView().findViewById(R.id.devKey)).setText(app.getDevKey());
+        ((TextView)getView().findViewById(R.id.prodKey)).setText(app.getProdKey());
 
-        ((TextView)findViewById(R.id.userId)).setText(Leanplum.getUserId());
-        ((TextView)findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
+        ((TextView)getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
+        ((TextView)getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
 
-        ((TextView)findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
-        ((TextView)findViewById(R.id.apiHostName)).setText(env.getApiHostName());
-        ((TextView)findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
-        ((TextView)findViewById(R.id.socketHostName)).setText(env.getSocketHostName());
-        ((TextView)findViewById(R.id.socketPort)).setText(String.valueOf(env.getSocketPort()));
+        ((TextView)getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
+        ((TextView)getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
+        ((TextView)getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
+        ((TextView)getView().findViewById(R.id.socketHostName)).setText(env.getSocketHostName());
+        ((TextView)getView().findViewById(R.id.socketPort)).setText(String.valueOf(env.getSocketPort()));
     }
 
     private void initLeanplum() {
@@ -101,7 +108,7 @@ public class AppSetupActivity extends AppCompatActivity {
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
-        Leanplum.start(this);
+        Leanplum.start(getContext());
     }
 
 }

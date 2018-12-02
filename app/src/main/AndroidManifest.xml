@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="SOME_GOOGLE_API_KEY_HERE" />
+
     <application
         android:name=".RondoApplication"
         android:allowBackup="true"
@@ -73,30 +77,30 @@
         <activity
             android:name=".PushActivity"
             android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AppSetupActivity"
             android:label="AppDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdhocActivity"
+            android:name=".AdhocFragment"
             android:label="AdhocActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LeanplumAppPickerActivity"
             android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LeanplumEnvPickerActivity"
             android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AppCreateActivity"
             android:label="@string/title_activity_push"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".MainActivity"-->
+            <!--android:label="@string/title_activity_main2"></activity>-->
     </application>
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="SOME_GOOGLE_API_KEY_HERE"/>
+
 </manifest>

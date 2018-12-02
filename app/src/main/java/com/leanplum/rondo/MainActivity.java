@@ -1,19 +1,12 @@
 package com.leanplum.rondo;
 
-import android.Manifest;
-import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.leanplum.Leanplum;
-import com.leanplum.annotations.Parser;
-import com.leanplum.rondo.models.InternalState;
-import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,144 +14,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                selectedFragment = new SdkQaFragment();
+                                break;
+                            case R.id.action_item2:
+                                selectedFragment = new AdhocFragment();
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = new AppSetupActivity();
+                                break;
+                        }
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
+                });
 
-        setUpAppState();
-        initLeanplum();
+        //Manually displaying the first fragment - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, new SdkQaFragment());
+        transaction.commit();
 
-        createTriggersButton();
-        createAppInboxButton();
-        createVariablesButton();
-        createMessagesButton();
-        createPushButton();
-        createAppSetupButton();
-        createAdhocButton();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        populateVersionURLInfo();
-    }
-
-    private void populateVersionURLInfo() {
-        InternalState state = InternalState.sharedState();
-        LeanplumApp app = state.getApp();
-        LeanplumEnvironment env = state.getEnv();
-
-        TextView tv = findViewById(R.id.sdkVersion);
-        tv.setText(BuildConfig.LEANPLUM_SDK_VERSION);
-
-        TextView tv1 = findViewById(R.id.appName);
-        tv1.setText(app.getDisplayName());
-
-        TextView apiUrl = findViewById(R.id.apiHostName);
-        apiUrl.setText(env.getApiHostName());
-    }
-
-    private void setUpAppState() {
-        InternalState state = InternalState.sharedState();
-        state.setApp(LeanplumApp.rondoQAProduction());
-        state.setEnv(LeanplumEnvironment.production());
-    }
-
-    private void initLeanplum() {
-        InternalState state = InternalState.sharedState();
-
-        LeanplumApp app = state.getApp();
-
-        Leanplum.setAppIdForDevelopmentMode(
-            app.getAppId(),
-            BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
-        );
-
-        LeanplumEnvironment env = state.getEnv();
-
-        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
-        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesActivity.class);
-
-        // Enable for GCM
-//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
-
-        Leanplum.start(this);
-    }
-
-    private void createTriggersButton() {
-        Button button = findViewById(R.id.triggers);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, TriggersActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createAppInboxButton() {
-        Button button = findViewById(R.id.appInbox);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, AppInboxActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createVariablesButton() {
-        Button button = findViewById(R.id.variables);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, VariablesActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createMessagesButton() {
-        Button button = findViewById(R.id.messages);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, MessagesActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createPushButton() {
-        Button button = findViewById(R.id.push);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, PushActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createAppSetupButton() {
-        Button button = findViewById(R.id.appSetup);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, AppSetupActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createAdhocButton() {
-        Button button = findViewById(R.id.adhoc);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, AdhocActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
+        //Used to select an item programmatically
+        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
     }
 }
