@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         populateVersionURLInfo();
 
         initLeanplum();
+        createStartButton();
         createTriggersButton();
         createAppInboxButton();
         createVariablesButton();
@@ -78,7 +79,16 @@ public class MainActivity extends AppCompatActivity {
         Leanplum.start(this);
     }
 
-
+    private void createStartButton() {
+        Button button = findViewById(R.id.call_start);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initLeanplum();
+            }
+        });
+    }
+    
     private void createTriggersButton() {
         Button button = findViewById(R.id.triggers);
         button.setOnClickListener(new View.OnClickListener() {
