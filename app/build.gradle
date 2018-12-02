@@ -2,7 +2,13 @@ apply plugin: 'com.android.application'
 
 def LEANPLUM_SDK_VERSION = "4.2.0"
 
+configurations {
+    packagedDebugCompile
+    sourcesDebugCompile
+}
+
 android {
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.leanplum.rondo"
