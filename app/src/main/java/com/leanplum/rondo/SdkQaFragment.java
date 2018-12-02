@@ -99,7 +99,7 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), TriggersActivity.class);
-                SdkQaFragment.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
@@ -110,7 +110,7 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), AppInboxActivity.class);
-                SdkQaFragment.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
@@ -121,7 +121,7 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), VariablesActivity.class);
-                SdkQaFragment.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
@@ -132,7 +132,7 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), MessagesActivity.class);
-                SdkQaFragment.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
@@ -143,7 +143,7 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), PushActivity.class);
-                SdkQaFragment.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }

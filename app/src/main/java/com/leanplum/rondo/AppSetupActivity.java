@@ -44,7 +44,7 @@ public class AppSetupActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), LeanplumAppPickerActivity.class);
-                AppSetupActivity.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
@@ -54,7 +54,7 @@ public class AppSetupActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), LeanplumEnvPickerActivity.class);
-                AppSetupActivity.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }

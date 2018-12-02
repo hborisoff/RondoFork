@@ -53,7 +53,7 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(LeanplumAppPickerActivity.this, AppCreateActivity.class);
-                LeanplumAppPickerActivity.this.startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
     }
