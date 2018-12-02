@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Rondo-Android.iml" filepath="$PROJECT_DIR$/Rondo-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RondoApp/RondoApp.iml" filepath="$PROJECT_DIR$/RondoApp/RondoApp.iml" />
     </modules>
   </component>
 </project>
