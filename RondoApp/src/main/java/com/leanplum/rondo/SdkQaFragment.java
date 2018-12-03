@@ -11,11 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.leanplum.Leanplum;
-import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import com.leanplum.rondo.models.LeanplumEnv;
 
 public class SdkQaFragment extends Fragment {
 
@@ -50,7 +48,7 @@ public class SdkQaFragment extends Fragment {
     private void populateVersionURLInfo() {
         InternalState state = InternalState.sharedState();
         LeanplumApp app = state.getApp();
-        LeanplumEnvironment env = state.getEnv();
+        LeanplumEnv env = state.getEnv();
 
         TextView tv = getView().findViewById(R.id.sdkVersion);
         tv.setText(BuildConfig.LEANPLUM_SDK_VERSION);

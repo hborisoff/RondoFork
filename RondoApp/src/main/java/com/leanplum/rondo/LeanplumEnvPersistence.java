@@ -1,6 +1,6 @@
 package com.leanplum.rondo;
 
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import com.leanplum.rondo.models.LeanplumEnv;
 
 import java.util.ArrayList;
 
@@ -9,40 +9,40 @@ import io.realm.RealmResults;
 
 public class LeanplumEnvPersistence {
 
-    static void saveLeanplumEnv(LeanplumEnvironment env) {
+    static void saveLeanplumEnv(LeanplumEnv env) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.copyToRealm(env);
         realm.commitTransaction();
     }
 
-    static ArrayList<LeanplumEnvironment> loadLeanplumEnvs() {
+    static ArrayList<LeanplumEnv> loadLeanplumEnvs() {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        RealmResults<LeanplumEnvironment> envs = realm.where(LeanplumEnvironment.class)
+        RealmResults<LeanplumEnv> envs = realm.where(LeanplumEnv.class)
                 .findAll();
         envs.load();
         realm.commitTransaction();
-        final ArrayList<LeanplumEnvironment> list = new ArrayList<LeanplumEnvironment>();
-        for (LeanplumEnvironment env:envs) {
+        final ArrayList<LeanplumEnv> list = new ArrayList<LeanplumEnv>();
+        for (LeanplumEnv env:envs) {
             list.add(env);
         }
         return list;
     }
 
-    static public LeanplumEnvironment production() {
+    static public LeanplumEnv production() {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        LeanplumEnvironment env = realm.where(LeanplumEnvironment.class).
+        LeanplumEnv env = realm.where(LeanplumEnv.class).
                 equalTo("apiHostName", "api.leanplum.com").findFirst();
         realm.commitTransaction();
         return env;
     }
 
-    static public LeanplumEnvironment qa() {
+    static public LeanplumEnv qa() {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        LeanplumEnvironment env = realm.where(LeanplumEnvironment.class).
+        LeanplumEnv env = realm.where(LeanplumEnv.class).
                 equalTo("apiHostName", "leanplum-qa-1372.appspot.com").findFirst();
         realm.commitTransaction();
         return env;
@@ -58,8 +58,8 @@ public class LeanplumEnvPersistence {
         }
     }
 
-    static private LeanplumEnvironment productionSeed() {
-        LeanplumEnvironment env = new LeanplumEnvironment();
+    static private LeanplumEnv productionSeed() {
+        LeanplumEnv env = new LeanplumEnv();
         env.setApiHostName ("api.leanplum.com");
         env.setApiSSL(true);
         env.setSocketHostName("dev.leanplum.com");
@@ -67,8 +67,8 @@ public class LeanplumEnvPersistence {
         return env;
     }
 
-    static private LeanplumEnvironment qaSeed() {
-        LeanplumEnvironment env = new LeanplumEnvironment();
+    static private LeanplumEnv qaSeed() {
+        LeanplumEnv env = new LeanplumEnv();
         env.setApiHostName("leanplum-qa-1372.appspot.com");
         env.setApiSSL(true);
         env.setSocketHostName("dev-qa.leanplum.com");

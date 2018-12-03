@@ -12,7 +12,7 @@ import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import com.leanplum.rondo.models.LeanplumEnv;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
         );
 
-        LeanplumEnvironment env = state.getEnv();
+        LeanplumEnv env = state.getEnv();
 
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());

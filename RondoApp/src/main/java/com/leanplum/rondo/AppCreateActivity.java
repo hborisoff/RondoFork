@@ -1,18 +1,12 @@
 package com.leanplum.rondo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.leanplum.Leanplum;
-import com.leanplum.annotations.Parser;
-import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
 
 public class AppCreateActivity extends AppCompatActivity {
 

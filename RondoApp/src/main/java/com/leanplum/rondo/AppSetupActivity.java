@@ -13,7 +13,7 @@ import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import com.leanplum.rondo.models.LeanplumEnv;
 
 public class AppSetupActivity extends Fragment {
 
@@ -73,7 +73,7 @@ public class AppSetupActivity extends Fragment {
     private void populateAppDetails() {
         InternalState state = InternalState.sharedState();
         LeanplumApp app = state.getApp();
-        LeanplumEnvironment env = state.getEnv();
+        LeanplumEnv env = state.getEnv();
 
         ((TextView)getView().findViewById(R.id.appName)).setText(app.getDisplayName());
         ((TextView)getView().findViewById(R.id.appId)).setText(app.getAppId());
@@ -100,7 +100,7 @@ public class AppSetupActivity extends Fragment {
                 BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
         );
 
-        LeanplumEnvironment env = state.getEnv();
+        LeanplumEnv env = state.getEnv();
 
         Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());

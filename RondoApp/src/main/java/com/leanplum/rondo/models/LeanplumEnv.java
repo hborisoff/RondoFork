@@ -3,7 +3,7 @@ package com.leanplum.rondo.models;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class LeanplumEnvironment extends RealmObject {
+public class LeanplumEnv extends RealmObject {
     @PrimaryKey
     private String apiHostName;
     private Boolean apiSSL;

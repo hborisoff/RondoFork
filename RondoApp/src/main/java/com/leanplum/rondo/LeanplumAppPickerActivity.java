@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.leanplum.rondo.adapters.LeanplumAppAdapter;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
 
 import java.util.ArrayList;
 

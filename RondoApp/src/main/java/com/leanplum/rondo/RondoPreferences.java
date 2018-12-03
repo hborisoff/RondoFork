@@ -1,7 +1,7 @@
 package com.leanplum.rondo;
 
 import com.leanplum.rondo.models.LeanplumApp;
-import com.leanplum.rondo.models.LeanplumEnvironment;
+import com.leanplum.rondo.models.LeanplumEnv;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -12,7 +12,7 @@ public class RondoPreferences extends RealmObject {
     @PrimaryKey
     private int id;
     private LeanplumApp app;
-    private LeanplumEnvironment env;
+    private LeanplumEnv env;
 
     static void updateRondoPreferencesWithApp(LeanplumApp app) {
         RondoPreferences prefs = RondoPreferences.getRondoPreferences();
@@ -23,7 +23,7 @@ public class RondoPreferences extends RealmObject {
         realm.commitTransaction();
     }
 
-    static void updateRondoPreferencesWithEnv(LeanplumEnvironment env) {
+    static void updateRondoPreferencesWithEnv(LeanplumEnv env) {
         RondoPreferences prefs = RondoPreferences.getRondoPreferences();
 
         Realm realm = Realm.getDefaultInstance();
@@ -37,7 +37,7 @@ public class RondoPreferences extends RealmObject {
         RondoPreferences rondoPreferences = realm.where(RondoPreferences.class).findFirst();
         if (rondoPreferences == null) {
             LeanplumApp app = LeanplumAppPersistence.rondoQAProduction();
-            LeanplumEnvironment env = LeanplumEnvPersistence.production();
+            LeanplumEnv env = LeanplumEnvPersistence.production();
 
             realm.beginTransaction();
             rondoPreferences = new RondoPreferences();
@@ -51,7 +51,7 @@ public class RondoPreferences extends RealmObject {
         return rondoPreferences;
     }
 
-    public LeanplumEnvironment getEnv() {
+    public LeanplumEnv getEnv() {
         return env;
     }
 
