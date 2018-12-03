@@ -24,9 +24,6 @@ public class SdkQaFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        setUpAppState();
-        initLeanplum();
     }
 
     @Override
@@ -63,34 +60,6 @@ public class SdkQaFragment extends Fragment {
 
         TextView apiUrl = getView().findViewById(R.id.apiHostName);
         apiUrl.setText(env.getApiHostName());
-    }
-
-    private void setUpAppState() {
-        InternalState state = InternalState.sharedState();
-        state.setApp(LeanplumApp.rondoQAProduction());
-        state.setEnv(LeanplumEnvironment.production());
-    }
-
-    private void initLeanplum() {
-        InternalState state = InternalState.sharedState();
-
-        LeanplumApp app = state.getApp();
-
-        Leanplum.setAppIdForDevelopmentMode(
-            app.getAppId(),
-            BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
-        );
-
-        LeanplumEnvironment env = state.getEnv();
-
-        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
-        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesActivity.class);
-
-        // Enable for GCM
-//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
-
-        Leanplum.start(getContext());
     }
 
     private void createTriggersButton() {

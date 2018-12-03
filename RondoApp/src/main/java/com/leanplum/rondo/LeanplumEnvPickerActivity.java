@@ -24,16 +24,8 @@ public class LeanplumEnvPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_env_picker);
         final ListView listview = findViewById(R.id.listview);
 
-        LeanplumEnvironment[] envs = new LeanplumEnvironment[] {
-                LeanplumEnvironment.production(),
-                LeanplumEnvironment.qa()
-        };
+        final ArrayList<LeanplumEnvironment> list = LeanplumEnvPersistence.loadLeanplumEnvs();
 
-        final ArrayList<LeanplumEnvironment> list = new ArrayList<LeanplumEnvironment>();
-        for (int i = 0; i < envs.length; ++i) {
-            list.add(envs[i]);
-            finish();
-        }
         final LeanplumEnvAdapter adapter = new LeanplumEnvAdapter(this,
                 list);
         listview.setAdapter(adapter);
@@ -44,7 +36,9 @@ public class LeanplumEnvPickerActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 final LeanplumEnvironment env = (LeanplumEnvironment) parent.getItemAtPosition(position);
+                RondoPreferences.updateRondoPreferencesWithEnv(env);
                 InternalState.sharedState().setEnv(env);
+                finish();
             }
         });
     }

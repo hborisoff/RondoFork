@@ -34,7 +34,6 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
         final ListView listview = findViewById(R.id.listview);
 
         final ArrayList<LeanplumApp> list = LeanplumAppPersistence.loadLeanplumApps();
-        list.add(LeanplumApp.rondoQAProduction());
 
         final LeanplumAppAdapter adapter = new LeanplumAppAdapter(this,
                 list);
@@ -47,6 +46,7 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
                                     int position, long id) {
                 final LeanplumApp app = (LeanplumApp) parent.getItemAtPosition(position);
                 InternalState.sharedState().setApp(app);
+                RondoPreferences.updateRondoPreferencesWithApp(app);
                 finish();
             }
 
