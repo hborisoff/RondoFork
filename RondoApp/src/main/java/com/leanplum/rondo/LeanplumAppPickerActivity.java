@@ -47,6 +47,7 @@ public class LeanplumAppPickerActivity extends AppCompatActivity {
                                     int position, long id) {
                 final LeanplumApp app = (LeanplumApp) parent.getItemAtPosition(position);
                 InternalState.sharedState().setApp(app);
+                finish();
             }
 
         });

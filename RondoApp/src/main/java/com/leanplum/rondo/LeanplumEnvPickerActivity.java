@@ -32,6 +32,7 @@ public class LeanplumEnvPickerActivity extends AppCompatActivity {
         final ArrayList<LeanplumEnvironment> list = new ArrayList<LeanplumEnvironment>();
         for (int i = 0; i < envs.length; ++i) {
             list.add(envs[i]);
+            finish();
         }
         final LeanplumEnvAdapter adapter = new LeanplumEnvAdapter(this,
                 list);

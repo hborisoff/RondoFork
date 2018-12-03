@@ -75,6 +75,7 @@ public class AppSetupActivity extends Fragment {
         LeanplumApp app = state.getApp();
         LeanplumEnvironment env = state.getEnv();
 
+        ((TextView)getView().findViewById(R.id.appName)).setText(app.getDisplayName());
         ((TextView)getView().findViewById(R.id.appId)).setText(app.getAppId());
         ((TextView)getView().findViewById(R.id.devKey)).setText(app.getDevKey());
         ((TextView)getView().findViewById(R.id.prodKey)).setText(app.getProdKey());
