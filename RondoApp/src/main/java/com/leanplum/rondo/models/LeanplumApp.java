@@ -1,6 +1,8 @@
 package com.leanplum.rondo.models;
 
-public class LeanplumApp {
+import io.realm.RealmObject;
+
+public class LeanplumApp extends RealmObject {
     private String appId;
     private String devKey;
     private String prodKey;
