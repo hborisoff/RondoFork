@@ -1,16 +1,12 @@
 package com.leanplum.rondo;
 
-import android.graphics.Color;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.leanplum.Leanplum;
@@ -19,7 +15,10 @@ import com.leanplum.LeanplumInboxMessage;
 
 import java.io.File;
 
-public class AppInboxActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AppInboxActivity extends
+        AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
