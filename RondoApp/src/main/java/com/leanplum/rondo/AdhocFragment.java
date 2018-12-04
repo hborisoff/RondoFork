@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class AdhocFragment extends Fragment {
 
+    AdhocPersistence persistence;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_adhoc, container, false);
@@ -25,7 +27,15 @@ public class AdhocFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        persistence = new AdhocPersistence(getContext());
+
         initButtons();
+        loadPersistedData();
+    }
+
+    private void loadPersistedData() {
+        ((EditText)getView().findViewById(R.id.trackName)).setText(persistence.loadSavedEvent());
+        ((EditText)getView().findViewById(R.id.stateName)).setText(persistence.loadSavedState());
     }
 
     private void sendTrackEvent() {
@@ -34,7 +44,7 @@ public class AdhocFragment extends Fragment {
         Leanplum.track(eventName.trim());
         // TODO: figure out how to alert event response/status
 
-
+        persistence.saveEvent(eventName);
     }
 
     private void sendState() {
@@ -43,7 +53,7 @@ public class AdhocFragment extends Fragment {
         Leanplum.track(stateName.trim());
         // TODO: figure out how to alert state response/status
 
-
+        persistence.saveState(stateName);
     }
 
     private void sendUserAttr() {
