@@ -34,7 +34,7 @@ public class AdhocFragment extends Fragment {
         Leanplum.track(eventName.trim());
         // TODO: figure out how to alert event response/status
 
-        ((EditText)getView().findViewById(R.id.trackName)).setText("");
+
     }
 
     private void sendState() {
@@ -43,7 +43,7 @@ public class AdhocFragment extends Fragment {
         Leanplum.track(stateName.trim());
         // TODO: figure out how to alert state response/status
 
-        ((EditText)getView().findViewById(R.id.stateName)).setText("");
+
     }
 
     private void sendUserAttr() {
@@ -56,8 +56,6 @@ public class AdhocFragment extends Fragment {
         Leanplum.setUserAttributes(attrib);
         // TODO: figure out how to alert state response/status
 
-        ((EditText)getView().findViewById(R.id.attrKey)).setText("");
-        ((EditText)getView().findViewById(R.id.attrValue)).setText("");
     }
 
     private void setDeviceLocation() {
@@ -72,8 +70,6 @@ public class AdhocFragment extends Fragment {
         Leanplum.setDeviceLocation(location);
         // TODO: figure out how to alert state response/status
 
-        ((EditText)getView().findViewById(R.id.locLatitude)).setText("");
-        ((EditText)getView().findViewById(R.id.locLongitude)).setText("");
     }
 
     private void setDeviceLocation(Intent data) {
