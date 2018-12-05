@@ -79,20 +79,6 @@
             android:textSize="14dp"
             />
         <Button
-            android:id="@+id/appInbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="App Inbox"
-            android:textSize="14dp"
-            />
-        <Button
-            android:id="@+id/variables"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Variables"
-            android:textSize="14dp"
-            />
-        <Button
             android:id="@+id/messages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

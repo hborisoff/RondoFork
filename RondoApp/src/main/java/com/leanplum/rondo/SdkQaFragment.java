@@ -33,8 +33,6 @@ public class SdkQaFragment extends Fragment {
     public void onStart() {
         super.onStart();
         createTriggersButton();
-        createAppInboxButton();
-        createVariablesButton();
         createMessagesButton();
         createPushButton();
     }
@@ -66,28 +64,6 @@ public class SdkQaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getActivity(), TriggersActivity.class);
-                startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createAppInboxButton() {
-        Button button = getView().findViewById(R.id.appInbox);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), AppInboxActivity.class);
-                startActivity(myIntent);
-            }
-        });
-    }
-
-    private void createVariablesButton() {
-        Button button = getView().findViewById(R.id.variables);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), VariablesActivity.class);
                 startActivity(myIntent);
             }
         });
