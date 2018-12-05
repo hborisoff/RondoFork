@@ -17,7 +17,7 @@
             android:textSize="14dp" android:gravity="center"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="All newsfeed messages for the user will show here. If you see nothing, try sending a new message."/>
+            android:text="All newsfeed messages for the user will show here. If you see nothing, try sending a new message from the dashboard."/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

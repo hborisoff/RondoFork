@@ -42,11 +42,14 @@ public class VariablesFragment extends Fragment {
         TextView bool = getView().findViewById(R.id.varBool);
         bool.setText(varBoolean.stringValue);
 
+        TextView file = getView().findViewById(R.id.varFile);
+        file.setText(varFile.stringValue);
+
         if (varFile.fileValue()!= null) {
             java.io.File imgFile = new java.io.File(varFile.fileValue());
             if(imgFile.exists()) {
-//                ImageView myImage = getView().findViewById(R.id.image);
-//                myImage.setImageURI(Uri.fromFile(imgFile));
+                ImageView myImage = getView().findViewById(R.id.varFileImage);
+                myImage.setImageURI(Uri.fromFile(imgFile));
             }
         }
     }
