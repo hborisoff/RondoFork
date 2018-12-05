@@ -14,9 +14,12 @@ import com.leanplum.annotations.File;
 import androidx.fragment.app.Fragment;
 
 public class VariablesFragment extends Fragment {
-    Var<String> composerName = Var.define("composerName", "Composer name");
-    Var<String> compositionTitle = Var.define("compositionTitle", "Composition Title");
-    Var<File> photoFile = Var.define("photograph", null);
+    Var<String> varString = Var.define("var_text", "Default value in code");
+    Var<Number> varNumber = Var.define("var_number", null);
+    Var<Boolean> varBoolean = Var.define("var_bool", false);
+    Var<File> varFile = Var.define("var_file", null);
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,17 +33,20 @@ public class VariablesFragment extends Fragment {
     }
 
     private void updateViewWithVariables() {
-        TextView name = getView().findViewById(R.id.name);
-        name.setText(composerName.stringValue);
+        TextView string = getView().findViewById(R.id.varString);
+        string.setText(varString.stringValue);
 
-        TextView title = getView().findViewById(R.id.title);
-        title.setText(compositionTitle.stringValue);
+        TextView number = getView().findViewById(R.id.varNumber);
+        number.setText(varNumber.stringValue);
 
-        if (photoFile.fileValue()!= null) {
-            java.io.File imgFile = new java.io.File(photoFile.fileValue());
+        TextView bool = getView().findViewById(R.id.varBool);
+        bool.setText(varBoolean.stringValue);
+
+        if (varFile.fileValue()!= null) {
+            java.io.File imgFile = new java.io.File(varFile.fileValue());
             if(imgFile.exists()) {
-                ImageView myImage = getView().findViewById(R.id.image);
-                myImage.setImageURI(Uri.fromFile(imgFile));
+//                ImageView myImage = getView().findViewById(R.id.image);
+//                myImage.setImageURI(Uri.fromFile(imgFile));
             }
         }
     }
