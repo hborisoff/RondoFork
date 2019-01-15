@@ -2,3 +2,5 @@ language: android
 android:
   components:
     - android-28
+  before_install:
+    - yes | sdkmanager "platforms;android-28"
