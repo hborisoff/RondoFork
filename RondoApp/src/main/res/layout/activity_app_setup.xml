@@ -284,5 +284,13 @@
             android:textSize="14dp"
             android:layout_gravity="center_horizontal"
             />
+        <Button
+            android:id="@+id/createChannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Push Notification Channel"
+            android:textSize="14dp"
+            android:layout_gravity="center_horizontal"
+            />
     </LinearLayout>
 </ScrollView>

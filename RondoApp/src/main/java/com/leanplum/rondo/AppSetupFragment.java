@@ -1,5 +1,6 @@
 package com.leanplum.rondo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -8,12 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leanplum.Leanplum;
 import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class AppSetupFragment extends Fragment {
 
@@ -29,6 +45,7 @@ public class AppSetupFragment extends Fragment {
         createStartButton();
         createAppPickerButton();
         createEnvPickerButton();
+        createChannelButton();
     }
 
     @Override
@@ -47,6 +64,7 @@ public class AppSetupFragment extends Fragment {
             }
         });
     }
+
     private void createEnvPickerButton() {
         Button button = getView().findViewById(R.id.env_picker);
         button.setOnClickListener(new View.OnClickListener() {
@@ -74,19 +92,19 @@ public class AppSetupFragment extends Fragment {
         LeanplumApp app = state.getApp();
         LeanplumEnv env = state.getEnv();
 
-        ((TextView)getView().findViewById(R.id.appName)).setText(app.getDisplayName());
-        ((TextView)getView().findViewById(R.id.appId)).setText(app.getAppId());
-        ((TextView)getView().findViewById(R.id.devKey)).setText(app.getDevKey());
-        ((TextView)getView().findViewById(R.id.prodKey)).setText(app.getProdKey());
+        ((TextView) getView().findViewById(R.id.appName)).setText(app.getDisplayName());
+        ((TextView) getView().findViewById(R.id.appId)).setText(app.getAppId());
+        ((TextView) getView().findViewById(R.id.devKey)).setText(app.getDevKey());
+        ((TextView) getView().findViewById(R.id.prodKey)).setText(app.getProdKey());
 
-        ((TextView)getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
-        ((TextView)getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
+        ((TextView) getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
+        ((TextView) getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
 
-        ((TextView)getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
-        ((TextView)getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
-        ((TextView)getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
-        ((TextView)getView().findViewById(R.id.socketHostName)).setText(env.getSocketHostName());
-        ((TextView)getView().findViewById(R.id.socketPort)).setText(String.valueOf(env.getSocketPort()));
+        ((TextView) getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
+        ((TextView) getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
+        ((TextView) getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
+        ((TextView) getView().findViewById(R.id.socketHostName)).setText(env.getSocketHostName());
+        ((TextView) getView().findViewById(R.id.socketPort)).setText(String.valueOf(env.getSocketPort()));
     }
 
     private void initLeanplum() {
@@ -109,6 +127,119 @@ public class AppSetupFragment extends Fragment {
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
         Leanplum.start(getContext());
+    }
+
+    private void createChannelButton() {
+        Button button = getView().findViewById(R.id.createChannel);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "https://"
+                        + InternalState.sharedState().getEnv().getApiHostName()
+                        + "/api?action=addAndroidNotificationChannel\n";
+                final Map<String, String> params = new HashMap<>();
+                InternalState state = InternalState.sharedState();
+                params.put("appId", state.getApp().getAppId());
+                params.put("clientKey", state.getApp().getDevKey());
+                params.put("apiVersion", "1.0.6");
+                params.put("id", "123");
+                params.put("name", "rondo-channel");
+                params.put("importance", "3");
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            performPostCall(url, params);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+            }
+        });
+    }
+
+    public String performPostCall(String requestURL, Map<String, String> postDataParams) {
+        URL url;
+        String response = "";
+        try {
+            url = new URL(requestURL);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getPostDataString(postDataParams));
+
+            writer.flush();
+            writer.close();
+            os.close();
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                final Context context = getContext();
+                String line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+                final String displayText = "Success, channel created. " +
+                        "200 received from server!";
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                final Context context = getContext();
+                String line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+                final String displayText = response;
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        } catch (Exception e) {
+            final Context context = getContext();
+            final String displayText = e.getMessage();
+            getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(context, displayText, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        return response;
+    }
+
+    private String getPostDataString(Map<String, String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 
 }
