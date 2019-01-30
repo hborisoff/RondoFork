@@ -284,5 +284,14 @@
             android:textSize="14dp"
             android:layout_gravity="center_horizontal"
             />
+        <Switch
+            android:id="@+id/productionMode"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchMinWidth="56dp"
+            android:text="Production Mode:"
+            android:textOff="OFF"
+            android:textOn="ON"/>
     </LinearLayout>
 </ScrollView>
