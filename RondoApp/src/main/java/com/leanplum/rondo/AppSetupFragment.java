@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.leanplum.annotations.Parser;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
+import com.leanplum.rondo.models.RondoProductionMode;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -46,6 +49,7 @@ public class AppSetupFragment extends Fragment {
         createAppPickerButton();
         createEnvPickerButton();
         createChannelButton();
+        setupProductionSwitch();
     }
 
     @Override
@@ -107,15 +111,35 @@ public class AppSetupFragment extends Fragment {
         ((TextView) getView().findViewById(R.id.socketPort)).setText(String.valueOf(env.getSocketPort()));
     }
 
+    private void setupProductionSwitch() {
+        Switch productionModeSwitch = getView().findViewById(R.id.productionMode);
+        final Context context = getContext();
+        productionModeSwitch.setChecked(RondoProductionMode.isProductionMode(context));
+
+        productionModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                RondoProductionMode.setProductionMode(context, isChecked);
+            }
+        });
+    }
+
     private void initLeanplum() {
         InternalState state = InternalState.sharedState();
 
         LeanplumApp app = state.getApp();
 
-        Leanplum.setAppIdForDevelopmentMode(
-                app.getAppId(),
-                BuildConfig.DEBUG ? app.getDevKey() : app.getProdKey()
-        );
+        if (RondoProductionMode.isProductionMode(getContext())) {
+            Leanplum.setAppIdForProductionMode(
+                    app.getAppId(),
+                    app.getProdKey()
+            );
+        } else {
+            Leanplum.setAppIdForDevelopmentMode(
+                    app.getAppId(),
+                    app.getDevKey()
+            );
+        }
 
         LeanplumEnv env = state.getEnv();
 
