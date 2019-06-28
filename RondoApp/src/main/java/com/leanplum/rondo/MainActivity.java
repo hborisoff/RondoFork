@@ -61,46 +61,5 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, new AppSetupFragment());
         transaction.commit();
-
-        setUpInitialAppState();
-        initLeanplum();
-
     }
-
-    private void setUpInitialAppState() {
-        InternalState state = InternalState.sharedState();
-        RondoPreferences rondoPreferences = RondoPreferences.getRondoPreferences();
-        state.setApp(rondoPreferences.getApp());
-        state.setEnv(rondoPreferences.getEnv());
-    }
-
-    private void initLeanplum() {
-        InternalState state = InternalState.sharedState();
-
-        LeanplumApp app = state.getApp();
-
-        if (RondoProductionMode.isProductionMode(this)) {
-            Leanplum.setAppIdForProductionMode(
-                    app.getAppId(),
-                    app.getProdKey()
-            );
-        } else {
-            Leanplum.setAppIdForDevelopmentMode(
-                    app.getAppId(),
-                    app.getDevKey()
-            );
-        }
-
-        LeanplumEnv env = state.getEnv();
-
-        Leanplum.setSocketConnectionSettings(env.getSocketHostName(), env.getSocketPort());
-        Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
-        Parser.parseVariablesForClasses(VariablesFragment.class);
-
-        // Enable for GCM
-//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
-
-        Leanplum.start(this);
-    }
-
 }
