@@ -41,7 +41,17 @@ public class AdhocFragment extends Fragment {
     private void sendTrackEvent() {
         String eventName = ((EditText)getView().findViewById(R.id.trackName))
             .getText().toString();
-        Leanplum.track(eventName.trim());
+        String paramKey = ((EditText)getView().findViewById(R.id.paramKey))
+                .getText().toString().trim();
+        String paramValue = ((EditText)getView().findViewById(R.id.paramValue))
+                .getText().toString().trim();
+        Map<String, String> params = new HashMap<>();
+        params.put(paramKey, paramValue);
+        if (paramKey != null && paramValue != null) {
+            Leanplum.track(eventName.trim(), params);
+        } else {
+            Leanplum.track(eventName.trim());
+        }
         // TODO: figure out how to alert event response/status
 
         persistence.saveEvent(eventName);

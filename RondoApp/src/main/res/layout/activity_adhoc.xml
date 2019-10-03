@@ -34,12 +34,28 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
             <EditText
-                android:id="@+id/trackName"
-                android:layout_height="wrap_content"
-                android:hint="Event Name (String)"
-                android:inputType="textNoSuggestions"
-                android:layout_width="fill_parent"
-                android:textSize="16dp">
+                    android:id="@+id/trackName"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Name (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
+            </EditText>
+            <EditText
+                    android:id="@+id/paramKey"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Parameter Key (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
+            </EditText>
+            <EditText
+                    android:id="@+id/paramValue"
+                    android:layout_height="wrap_content"
+                    android:hint="Event Parameter Value (String)"
+                    android:inputType="textNoSuggestions"
+                    android:layout_width="fill_parent"
+                    android:textSize="16dp">
             </EditText>
             <Button
                 android:id="@+id/buttonTrack"
