@@ -78,6 +78,15 @@ public class AdhocFragment extends Fragment {
 
     }
 
+  private void setUserId() {
+    String userId = ((EditText)getView().findViewById(R.id.userIdKey)).getText().toString();
+    Leanplum.setUserId(userId.trim());
+  }
+
+  private void forceContentUpdate() {
+    Leanplum.forceContentUpdate();
+  }
+
     private void setDeviceLocation() {
         Float latitude = Float.parseFloat(
                 ((EditText)getView().findViewById(R.id.locLatitude)).getText().toString());
@@ -132,6 +141,22 @@ public class AdhocFragment extends Fragment {
                         setDeviceLocation();
                     }
                 });
+
+        getView().findViewById(R.id.buttonUserId)
+            .setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                setUserId();
+              }
+            });
+
+        getView().findViewById(R.id.buttonForceContentUpdate)
+            .setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                forceContentUpdate();
+              }
+            });
 /*
         findViewById(R.id.buttonPlacePicker)
                 .setOnClickListener(new View.OnClickListener() {
