@@ -35,6 +35,7 @@ public class LeanplumAppPersistence {
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             realm.copyToRealm(rondoQAProductionSeed());
+            realm.copyToRealm(rondoQAAutomationSeed());
             realm.copyToRealm(musalaQASeed());
             realm.commitTransaction();
         }
@@ -72,6 +73,24 @@ public class LeanplumAppPersistence {
         app.setAppId("app_qA781mPlJYjzlZLDlTh68cdNDUOf31kcTg1TCbSXSS0");
         app.setDevKey("dev_WqNqX0qOOHyTEQtwKXs5ldhqErHfixvcSAMlYgyIL0U");
         app.setProdKey("prod_kInQHXLJ0Dju7QJRocsD5DYMdYAVbdGGwhl6doTfH0k");
+        app.setDisplayName("Musala QA");
+        return app;
+    }
+
+    static public LeanplumApp rondoQAAutomation() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        LeanplumApp app = realm.where(LeanplumApp.class).
+                equalTo("displayName", "Rondo QA Automation").findFirst();
+        realm.commitTransaction();
+        return app;
+    }
+
+    static private LeanplumApp rondoQAAutomationSeed() {
+        LeanplumApp app = new LeanplumApp();
+        app.setAppId("app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZM");
+        app.setDevKey("dev_b9qX0tcazL5PCQFuZ7pxsfT6XHA7xQkaFtYVrgt4Kq0");
+        app.setProdKey("prod_lL8RSFzmHy0iVYXQpzjUVEHDlaUz5idT0H7BVs6Bn1Q");
         app.setDisplayName("Musala QA");
         return app;
     }
