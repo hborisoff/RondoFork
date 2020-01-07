@@ -8,9 +8,6 @@ android:
   - android-28
 jdk:
   - oraclejdk8
-stages:
-  - name: deploy
-    if: "env(LEANPLUM_SDK_VERSION) IS present"
 # blocklist
 branches:
   except:
