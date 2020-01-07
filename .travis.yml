@@ -20,5 +20,4 @@ deploy:
   file: "RondoApp/build/outputs/apk/debug/RondoApp-debug.apk"
   draft: true
   on:
-    repo: Leanplum/Rondo-Android
     tags: true
