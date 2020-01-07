@@ -7,11 +7,12 @@ android:
   - build-tools-28.0.3
   - android-28
 jdk:
-- oraclejdk8
+  - oraclejdk8
 script:
-- "./gradlew test"
+  - echo "Building SDK version $LEANPLUM_SDK_VERSION"
+  - "./gradlew test"
 before_deploy:
-- "./gradlew assembleDebug"
+  - "./gradlew assembleDebug"
 deploy:
   provider: releases
   skip_cleanup: true
