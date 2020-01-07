@@ -27,4 +27,5 @@ deploy:
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   tag: "$LEANPLUM_SDK_VERSION"
   on:
-    condition: "env(LEANPLUM_SDK_VERSION) IS present"
+    condition: "-n \"$LEANPLUM_SDK_VERSION\""
+
