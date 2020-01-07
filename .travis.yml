@@ -12,6 +12,7 @@ script:
 - "./gradlew test"
 before_deploy:
 - "./gradlew assembleDebug"
+- ls RondoApp/build/outputs/apk/debug/RondoApp-debug.apk
 deploy:
   provider: releases
   api_key:
