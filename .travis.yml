@@ -10,7 +10,22 @@ android:
 
     # The SDK version used to compile your project
     - android-28
+
 jdk:
 - oraclejdk8
+
 script:
 - ./gradlew test
+
+before_deploy:
+  - ./gradlew assembleDebug
+
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+      secure: $GITHUB_TOKEN
+    file: RondoApp/build/outputs/apk/debug/RondoApp-debug.apk
+    draft: true
+    on:
+      tags: true
