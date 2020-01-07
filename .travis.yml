@@ -12,6 +12,8 @@ script:
   - "./gradlew test"
 before_deploy:
   - "./gradlew assembleDebug"
+  - echo "$LEANPLUM_SDK_VERSION"
+  - 
 deploy:
   provider: releases
   skip_cleanup: true
@@ -20,4 +22,4 @@ deploy:
   file: "RondoApp/build/outputs/apk/debug/RondoApp-debug.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   on:
-    condition: [[ -z "$LEANPLUM_SDK_VERSION" ]]
+    condition: -z "$LEANPLUM_SDK_VERSION"
