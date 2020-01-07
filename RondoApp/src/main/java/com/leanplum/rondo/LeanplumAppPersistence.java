@@ -91,7 +91,7 @@ public class LeanplumAppPersistence {
         app.setAppId("app_UQcFGVeXzOCVsovrlUebad9R67hFJqzDegfQPZRnVZM");
         app.setDevKey("dev_b9qX0tcazL5PCQFuZ7pxsfT6XHA7xQkaFtYVrgt4Kq0");
         app.setProdKey("prod_lL8RSFzmHy0iVYXQpzjUVEHDlaUz5idT0H7BVs6Bn1Q");
-        app.setDisplayName("Musala QA");
+        app.setDisplayName("Rondo QA Automation");
         return app;
     }
 
