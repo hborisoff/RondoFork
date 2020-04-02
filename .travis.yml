@@ -19,6 +19,7 @@ before_deploy:
   - echo "$LEANPLUM_SDK_VERSION"
   - git tag $LEANPLUM_SDK_VERSION
 deploy:
+  if: branch = master AND env(LEANPLUM_SDK_VERSION) IS present
   provider: releases
   edge: true
   api_key:
@@ -26,6 +27,3 @@ deploy:
   file: "RondoApp/build/outputs/apk/debug/RondoApp-debug.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   tag: "$LEANPLUM_SDK_VERSION"
-  on:
-    condition: "-n \"$LEANPLUM_SDK_VERSION\""
-
