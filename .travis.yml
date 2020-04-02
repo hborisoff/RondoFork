@@ -16,8 +16,6 @@ script:
   - "./gradlew test"
 before_deploy:
   - "./gradlew assembleDebug"
-  - echo "$LEANPLUM_SDK_VERSION"
-  - git tag $LEANPLUM_SDK_VERSION
 deploy:
   provider: releases
   edge: true
