@@ -1,7 +1,4 @@
 language: android
-stages:
-  - name: deploy
-    if: branch = master AND env(LEANPLUM_SDK_VERSION) IS present
 android:
   components:
   - tools
@@ -29,3 +26,6 @@ deploy:
   file: "RondoApp/build/outputs/apk/debug/RondoApp-debug.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   tag: "$LEANPLUM_SDK_VERSION"
+  on:
+    branch: master
+    condition: '-n "$LEANPLUM_SDK_VERSION"'
