@@ -1,4 +1,7 @@
 language: android
+stages:
+  - name: deploy
+    if: branch = master AND env(LEANPLUM_SDK_VERSION) IS present
 android:
   components:
   - tools
@@ -19,7 +22,6 @@ before_deploy:
   - echo "$LEANPLUM_SDK_VERSION"
   - git tag $LEANPLUM_SDK_VERSION
 deploy:
-  if: branch = master AND env(LEANPLUM_SDK_VERSION) IS present
   provider: releases
   edge: true
   api_key:
