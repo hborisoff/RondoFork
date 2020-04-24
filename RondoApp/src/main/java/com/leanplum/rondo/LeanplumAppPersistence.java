@@ -34,9 +34,9 @@ public class LeanplumAppPersistence {
         if (rondoQAProduction() == null) {
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
-            realm.copyToRealm(rondoQAProductionSeed());
-            realm.copyToRealm(rondoQAAutomationSeed());
-            realm.copyToRealm(musalaQASeed());
+            realm.copyToRealmOrUpdate(rondoQAProductionSeed());
+            realm.copyToRealmOrUpdate(rondoQAAutomationSeed());
+            realm.copyToRealmOrUpdate(musalaQASeed());
             realm.commitTransaction();
         }
     }
