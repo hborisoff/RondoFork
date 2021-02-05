@@ -29,6 +29,8 @@ public class RondoApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        RondoConfig.load(this);
+
         FirebaseApp.initializeApp(this);
 
         Leanplum.setApplicationContext(this);
