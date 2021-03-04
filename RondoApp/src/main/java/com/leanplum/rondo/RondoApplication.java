@@ -3,7 +3,6 @@ package com.leanplum.rondo;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.multidex.MultiDex;
 import com.google.firebase.FirebaseApp;
@@ -79,7 +78,18 @@ public class RondoApplication extends Application {
         // Enable for GCM
 //        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
 
+        initMiPushApp();
+
         Leanplum.start(this);
+    }
+
+    private void initMiPushApp() {
+        try {
+            Class.forName("com.leanplum.LeanplumMiPushHandler")
+                .getDeclaredMethod("setApplication", String.class, String.class)
+                .invoke(null, "2882303761518843048", "5601884323048"); // TODO Currently Rondo App from Xiaomi console
+        } catch (Throwable ignore) {
+        }
     }
 
     @Override
