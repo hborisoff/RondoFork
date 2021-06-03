@@ -104,7 +104,11 @@ public class AppSetupFragment extends Fragment {
         ((TextView) getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
         ((TextView) getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
 
-        ((TextView) getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
+        if (BuildConfig.FLAVOR.equals("prod")) {
+            ((TextView) getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
+        } else if (BuildConfig.FLAVOR.equals("dev")) {
+            ((TextView) getView().findViewById(R.id.sdkVersion)).setText("development");
+        }
         ((TextView) getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
         ((TextView) getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
         ((TextView) getView().findViewById(R.id.socketHostName)).setText(env.getSocketHostName());

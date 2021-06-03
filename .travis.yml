@@ -36,13 +36,13 @@ branches:
 script:
   - "./gradlew test"
 before_deploy:
-  - "./gradlew assembleRelease"
+  - "./gradlew assembleProdRelease"
 deploy:
   provider: releases
   edge: true
   api_key:
     secure: TE/ZGlEW/30cFz4CYkEzRKFj2E3T5pJXv9wd37md2a7MOd+QCEuEw7OAmS3Ya6VqZFQcGGGT2dDT1dVFWVOKyKW9rU3JrCX/F/lVCkFc2OIbmGMyJ3sP5swdl53Z+ECAyjC3fsex44tNjifH8rZ0UBMMGZOeVGqkkToin730GhQG6v1XREfSwJ5lSwsC59dR1zxpPzz36lDjaLTaJjLhQ7tOVQnJ7W//G2Nxjv28cGTr2GIwIn1dYNcyvy292Gd9rQz8zkInhJokqH+lLhnUxwj2Ce0xv3dCpDnqzlVkw5rBDPt24Y1/KYzKMTWNfqpS/wvI5as0Qq6m9Xd9GX1Nvadn36K5O/R5RtZA9DZaMQJ+Od16uzRTXcJUFgyCr4AuDsYpjXDF6EDReSWVkYEi4ZCMzXqL9m7KYwTF2zQrivTHPZ0TbX/qN32fs85ePaGOSYvV/vJLm+Yn6Lqt5ffdDBV5D+NRoyYES6nXXFHTKA0FcucZkeTqQVCtxTveyLUeNSEGPp+JYIEAxInb4joNKQWXEBVGMYViLAUNYaSdY8ZJa6KF1uhksZ8SRFQrvBav7ChZ8sPmM9d35+fSQZcoxdAtp2YT2IzUbqbdPCPcdGictiTXMgSWCxGuQGeXKOetOs79ZoctaWMfFn9sdB/fYlLAyvtvf6U11YJL1ri6wiQ=
-  file: "RondoApp/build/outputs/apk/release/RondoApp-release.apk"
+  file: "RondoApp/build/outputs/apk/prod/release/RondoApp-prod-release.apk"
   name: "Android SDK $LEANPLUM_SDK_VERSION"
   tag: "$LEANPLUM_SDK_VERSION"
   on:

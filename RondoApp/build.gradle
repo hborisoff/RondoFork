@@ -17,10 +17,6 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
 
         buildTypes.each {
             it.buildConfigField "String", "LEANPLUM_SDK_VERSION", "\"${LEANPLUM_SDK_VERSION}\""
@@ -31,6 +27,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        prod {
+            dimension "version"
+            getIsDefault().set(true)
+        }
+        if (findProject(':AndroidSDK') != null) {
+            dev {
+                dimension "version"
+            }
+        }
+    }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -56,19 +66,27 @@ dependencies {
     //External Dependencies
     implementation "com.google.android.gms:play-services-location:17.0.0"
     implementation 'com.google.firebase:firebase-messaging:20.2.0' // for FCM
-//    implementation "com.google.android.gms:play-services-gcm:11.8+" // for GCM
 
-    // Released Packages
-    implementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
-    implementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
+    // SDK from released packages (prod flavor)
+    prodImplementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
+    prodImplementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
+    prodImplementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
+    prodImplementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
     if (isMiPushSupported(LEANPLUM_SDK_VERSION)) {
         println "adding leanplum-mipush dependency"
-        implementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
+        prodImplementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
     }
 
-//    implementation "com.leanplum:leanplum-monitoring:+"
+    // SDK from source (dev flavor)
+    if (findProject(':AndroidSDK') != null) {
+        devImplementation project(':AndroidSDKCore')
+        devImplementation project(':AndroidSDKPush')
+        devImplementation project(':AndroidSDKLocation')
+        devImplementation project(':AndroidSDKFcm')
+        if (findProject(':AndroidSDKMiPush') != null) {
+            devImplementation project(':AndroidSDKMiPush')
+        }
+    }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
