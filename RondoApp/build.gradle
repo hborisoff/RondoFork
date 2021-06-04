@@ -32,11 +32,11 @@ android {
     productFlavors {
         prod {
             dimension "version"
-            getIsDefault().set(true)
         }
         if (findProject(':AndroidSDK') != null) {
             dev {
                 dimension "version"
+                getIsDefault().set(true)
             }
         }
     }
