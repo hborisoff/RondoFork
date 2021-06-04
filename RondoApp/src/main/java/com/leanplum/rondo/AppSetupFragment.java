@@ -2,6 +2,7 @@ package com.leanplum.rondo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -104,10 +105,14 @@ public class AppSetupFragment extends Fragment {
         ((TextView) getView().findViewById(R.id.userId)).setText(Leanplum.getUserId());
         ((TextView) getView().findViewById(R.id.deviceId)).setText(Leanplum.getDeviceId());
 
+        TextView sdkVersion = (TextView) getView().findViewById(R.id.sdkVersion);
+        if (BuildConfig.DEBUG) {
+            sdkVersion.setTypeface(sdkVersion.getTypeface(), Typeface.BOLD);
+        }
         if (BuildConfig.FLAVOR.equals("prod")) {
-            ((TextView) getView().findViewById(R.id.sdkVersion)).setText(BuildConfig.LEANPLUM_SDK_VERSION);
+            sdkVersion.setText(BuildConfig.LEANPLUM_SDK_VERSION);
         } else if (BuildConfig.FLAVOR.equals("dev")) {
-            ((TextView) getView().findViewById(R.id.sdkVersion)).setText("development");
+            sdkVersion.setText("development");
         }
         ((TextView) getView().findViewById(R.id.apiHostName)).setText(env.getApiHostName());
         ((TextView) getView().findViewById(R.id.apiSSL)).setText(env.getApiSSL().toString());
