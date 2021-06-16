@@ -36,7 +36,7 @@ public class LeanplumAppPersistence {
     static void saveLeanplumApp(LeanplumApp app) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        realm.copyToRealm(app);
+        realm.copyToRealmOrUpdate(app);
         realm.commitTransaction();
     }
 

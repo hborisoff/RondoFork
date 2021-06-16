@@ -23,7 +23,7 @@ public class LeanplumEnvPersistence {
     static void saveLeanplumEnv(LeanplumEnv env) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        realm.copyToRealm(env);
+        realm.copyToRealmOrUpdate(env);
         realm.commitTransaction();
     }
 
