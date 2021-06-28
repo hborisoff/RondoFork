@@ -66,18 +66,20 @@ public class MessagesActivity extends AppCompatActivity {
             context.getSharedPreferences("__leanplum_messaging__", Context.MODE_PRIVATE);
         Map<String, ?> all = prefs.getAll();
 
-        if (all.isEmpty()) {
-            Log.d("No impression occurrences yet.");
-            return;
-        }
+        boolean hasImpressions = false;
 
         for (Map.Entry<String, ?> entry : all.entrySet()) {
             if (entry.getKey().startsWith(prefix)) {
                 String json = (String) entry.getValue();
                 if (!TextUtils.isEmpty(json)) {
+                    hasImpressions = true;
                     Log.d("messageId=" + entry.getKey().replace(prefix, "") + " -> " + json);
                 }
             }
+        }
+
+        if (!hasImpressions) {
+            Log.d("No impression occurrences yet.");
         }
     }
 
@@ -89,18 +91,20 @@ public class MessagesActivity extends AppCompatActivity {
             context.getSharedPreferences("__leanplum_messaging__", Context.MODE_PRIVATE);
         Map<String, ?> all = prefs.getAll();
 
-        if (all.isEmpty()) {
-            Log.d("No trigger occurrences yet.");
-            return;
-        }
+        boolean hasTriggers = false;
 
         for (Map.Entry<String, ?> entry : all.entrySet()) {
             if (entry.getKey().startsWith(prefix)) {
                 Object value = entry.getValue();
                 if (value != null) {
+                    hasTriggers = true;
                     Log.d("messageId=" + entry.getKey().replace(prefix, "") + " -> " + value);
                 }
             }
+        }
+
+        if (!hasTriggers) {
+            Log.d("No trigger occurrences yet.");
         }
     }
 }
