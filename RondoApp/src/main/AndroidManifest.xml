@@ -80,6 +80,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+          xmlns:tools="http://schemas.android.com/tools"
+          android:name="com.journeyapps.barcodescanner.CaptureActivity"
+          tools:replace="android:screenOrientation"
+          android:screenOrientation="sensor" />
+
     </application>
 
 </manifest>
