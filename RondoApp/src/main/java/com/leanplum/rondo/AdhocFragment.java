@@ -48,7 +48,10 @@ public class AdhocFragment extends Fragment {
                 .getText().toString().trim();
         Map<String, String> params = new HashMap<>();
         params.put(paramKey, paramValue);
-        if (paramKey != null && paramValue != null) {
+
+        if (TextUtils.isEmpty(paramKey) && isDouble(paramValue)) {
+          Leanplum.track(eventName.trim(), Double.parseDouble(paramValue));
+        } else if (paramKey != null && paramValue != null) {
             Leanplum.track(eventName.trim(), params);
         } else {
             Leanplum.track(eventName.trim());
@@ -56,6 +59,15 @@ public class AdhocFragment extends Fragment {
         // TODO: figure out how to alert event response/status
 
         persistence.saveEvent(eventName);
+    }
+
+    private boolean isDouble(String value) {
+      try {
+        Double.parseDouble(value);
+        return true;
+      } catch (NumberFormatException ignored) {
+        return false;
+      }
     }
 
     private void sendState() {
