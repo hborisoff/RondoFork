@@ -104,6 +104,8 @@ dependencies {
     implementation 'com.google.android.play:core:1.8.2'
     // Library for scanning QR codes. Do not use latest version as it bumps minSDK.
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    // Json canonicalization for Variable Signing
+    implementation 'io.github.erdtman:java-json-canonicalization:1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

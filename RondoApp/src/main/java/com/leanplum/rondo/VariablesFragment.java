@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.leanplum.Leanplum;
 import com.leanplum.Var;
+import com.leanplum.SecuredVars;
+import java.lang.ref.WeakReference;
 
 
 public class VariablesFragment extends Fragment {
@@ -18,7 +21,7 @@ public class VariablesFragment extends Fragment {
     Var<Boolean> varBoolean = Var.define("var_bool", false);
     Var<String> varFile = Var.defineFile("var_file", null);
 
-
+    private Thread signatureVerificationThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class VariablesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         updateViewWithVariables();
+        verifySignature();
     }
 
     private void updateViewWithVariables() {
@@ -49,6 +53,58 @@ public class VariablesFragment extends Fragment {
             if(imgFile.exists()) {
                 ImageView myImage = getView().findViewById(R.id.varFileImage);
                 myImage.setImageURI(Uri.fromFile(imgFile));
+            }
+        }
+    }
+
+    private void verifySignature() {
+        TextView view = getView().findViewById(R.id.verificationResult);
+
+        SecuredVars securedVars = Leanplum.securedVars();
+        if (securedVars != null) {
+            view.setText("verifying...");
+            signatureVerificationThread = new SignatureVerificationThread(securedVars, view);
+            signatureVerificationThread.start();
+        } else {
+            view.setText("missing");
+        }
+    }
+
+    public void onStop() {
+        super.onStop();
+        if (signatureVerificationThread != null) {
+            signatureVerificationThread.interrupt();
+            signatureVerificationThread = null;
+        }
+    }
+
+    private static class SignatureVerificationThread extends Thread {
+        SecuredVars securedVars;
+        WeakReference<TextView> viewRef;
+
+        SignatureVerificationThread(SecuredVars securedVars, TextView view) {
+            this.securedVars = securedVars;
+            viewRef = new WeakReference<>(view);
+        }
+
+        @Override
+        public void run() {
+            String publicKey = SecuredVarsHelper.downloadPublicKey();
+            if (publicKey == null) {
+                showText("public key error");
+            } else {
+                if (SecuredVarsHelper.verify(securedVars, publicKey)) {
+                    showText("verified");
+                } else {
+                    showText("verification error");
+                }
+            }
+        }
+
+        void showText(String text) {
+            TextView view = viewRef.get();
+            if (view != null) {
+                view.post(() -> view.setText(text));
             }
         }
     }
