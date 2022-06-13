@@ -115,6 +115,9 @@ def getSigningProperties() {
         properties.put(KEYSTORE_KEYALIAS_PROP, System.getenv('keystore_alias'))
         properties.put(KEYSTORE_KEYPASS_PROP, System.getenv('keystore_alias_password'))
         return properties
+    } else if (!project.rootProject.file('local.properties').exists()) {
+        println 'local.properties file is missing'
+        return new Properties()
     } else {
         println 'Using local.properties for signing properties'
         InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()

@@ -1,38 +1,39 @@
 // Check existence of SDK sources in parent directory, otherwise only prod flavor will be compilable.
-if (new File('../Leanplum-Android-SDK').exists()) {
+def leanplumSdkSourceDir = "$rootDir/../Leanplum-Android-SDK"
+if (new File(leanplumSdkSourceDir).exists()) {
 
     include ':AndroidSDK'
-    project(':AndroidSDK').projectDir = new File('../Leanplum-Android-SDK/AndroidSDK')
+    project(':AndroidSDK').projectDir = new File("$leanplumSdkSourceDir/AndroidSDK")
 
     include ':AndroidSDKTests'
-    project(':AndroidSDKTests').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKTests')
+    project(':AndroidSDKTests').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKTests")
 
     include ':AndroidSDKCore'
-    project(':AndroidSDKCore').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKCore')
+    project(':AndroidSDKCore').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKCore")
 
     include ':AndroidSDKPush'
-    project(':AndroidSDKPush').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKPush')
+    project(':AndroidSDKPush').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKPush")
 
     include ':AndroidSDKFcm'
-    project(':AndroidSDKFcm').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKFcm')
+    project(':AndroidSDKFcm').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKFcm")
 
-    def miPushDir = new File('../Leanplum-Android-SDK/AndroidSDKMiPush')
+    def miPushDir = new File("$leanplumSdkSourceDir/AndroidSDKMiPush")
     if (miPushDir.exists()) {
         include ':AndroidSDKMiPush'
         project(':AndroidSDKMiPush').projectDir = miPushDir
     }
 
-    def hmsDir = new File('../Leanplum-Android-SDK/AndroidSDKHms')
+    def hmsDir = new File("$leanplumSdkSourceDir/AndroidSDKHms")
     if (hmsDir.exists()) {
         include ':AndroidSDKHms'
         project(':AndroidSDKHms').projectDir = hmsDir
     }
 
     include ':AndroidSDKLocation'
-    project(':AndroidSDKLocation').projectDir = new File('../Leanplum-Android-SDK/AndroidSDKLocation')
+    project(':AndroidSDKLocation').projectDir = new File("$leanplumSdkSourceDir/AndroidSDKLocation")
 
     include ':Leanplum-Android-SDK'
-    project(':Leanplum-Android-SDK').projectDir = new File('../Leanplum-Android-SDK/')
+    project(':Leanplum-Android-SDK').projectDir = new File("$leanplumSdkSourceDir")
 
 }
 
