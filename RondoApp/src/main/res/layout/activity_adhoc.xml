@@ -210,6 +210,45 @@
             </Button>
         </LinearLayout>
         <LinearLayout
+          android:layout_width="fill_parent"
+          android:orientation="vertical"
+          android:layout_height="wrap_content"
+          android:paddingBottom="40dp">
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="20dp"
+              android:text="Set Device Id"
+              android:textColor="@color/colorPrimaryDark" />
+            <EditText
+              android:id="@+id/deviceIdKey"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:hint="Device Id (String)"
+              android:inputType="textNoSuggestions"
+              android:textSize="16dp">
+            </EditText>
+            <LinearLayout
+              android:layout_width="fill_parent"
+              android:orientation="horizontal"
+              android:layout_height="wrap_content">
+                <Button
+                  android:id="@+id/generateDeviceId"
+                  android:layout_height="wrap_content"
+                  android:text="New Random ID"
+                  android:layout_width="0px"
+                  android:layout_weight="1"
+                  android:textSize="16dp" />
+                <Button
+                  android:id="@+id/sendDeviceId"
+                  android:layout_height="wrap_content"
+                  android:text="Send Device Id"
+                  android:layout_width="0px"
+                  android:layout_weight="1"
+                  android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="fill_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content"

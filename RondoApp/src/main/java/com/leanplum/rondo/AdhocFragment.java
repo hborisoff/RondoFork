@@ -15,6 +15,7 @@ import com.leanplum.Leanplum;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class AdhocFragment extends Fragment {
 
@@ -106,6 +107,16 @@ public class AdhocFragment extends Fragment {
     Leanplum.setUserId(userId.trim());
   }
 
+  private void generateDeviceId() {
+    String randomId = UUID.randomUUID().toString() + "-Rondo";
+    ((EditText)getView().findViewById(R.id.deviceIdKey)).setText(randomId);
+  }
+
+  private void setDeviceId() {
+    String deviceId = ((EditText)getView().findViewById(R.id.deviceIdKey)).getText().toString();
+    Leanplum.forceNewDeviceId(deviceId.trim());
+  }
+
   private void forceContentUpdate() {
     Leanplum.forceContentUpdate();
   }
@@ -172,6 +183,9 @@ public class AdhocFragment extends Fragment {
                 setUserId();
               }
             });
+
+        getView().findViewById(R.id.generateDeviceId).setOnClickListener(v -> generateDeviceId());
+        getView().findViewById(R.id.sendDeviceId).setOnClickListener(v -> setDeviceId());
 
         getView().findViewById(R.id.buttonForceContentUpdate)
             .setOnClickListener(new View.OnClickListener() {
