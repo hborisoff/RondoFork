@@ -124,7 +124,10 @@ class QueueActivity : AppCompatActivity() {
     val checked: Boolean = (view as CompoundButton).isChecked
 
     when (view) {
-      pauseQueueView() -> LeanplumActions.setQueuePaused(checked)
+      pauseQueueView() -> {
+        LeanplumActions.setQueuePaused(checked)
+        initCheckBoxes()
+      }
       disableQueueView() -> LeanplumActions.setQueueEnabled(!checked)
       dismissOnPushOpenedView() -> LeanplumActions.setDismissOnPushOpened(checked)
       continueOnActivityResumeView() -> LeanplumActions.setContinueOnActivityResumed(checked)
