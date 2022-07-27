@@ -171,7 +171,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:onClick="onRadioButtonClicked"
-          android:text="None"/>
+          android:text="All" />
         <RadioButton
           android:id="@+id/radioOnlyFirst"
           android:layout_width="wrap_content"
