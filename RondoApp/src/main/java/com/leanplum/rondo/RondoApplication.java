@@ -5,11 +5,13 @@ import android.content.Context;
 import android.os.Build;
 
 import androidx.multidex.MultiDex;
+import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
+import com.clevertap.android.sdk.CleverTapAPI;
+import com.clevertap.android.sdk.pushnotification.PushConstants;
 import com.google.firebase.FirebaseApp;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.annotations.Parser;
-import com.leanplum.callbacks.StartCallback;
 import com.leanplum.internal.Log.Level;
 import com.leanplum.rondo.models.InternalState;
 import com.leanplum.rondo.models.LeanplumApp;
@@ -17,6 +19,8 @@ import com.leanplum.rondo.models.LeanplumApp;
 import com.leanplum.rondo.models.LeanplumEnv;
 import com.leanplum.rondo.models.RondoProductionMode;
 import io.realm.Realm;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RondoApplication extends Application {
 
@@ -33,8 +37,8 @@ public class RondoApplication extends Application {
 
         FirebaseApp.initializeApp(this);
 
-        Leanplum.setLogLevel(Level.DEBUG);
         Leanplum.setApplicationContext(this);
+        Leanplum.setLogLevel(Level.DEBUG);
 
         QueueActivityModel.INSTANCE.setListenerEnabled(true);
 
@@ -46,6 +50,7 @@ public class RondoApplication extends Application {
         LeanplumEnvPersistence.seedDatabase();
 
         setUpInitialAppState();
+        initCleverTap();
         initLeanplum();
     }
 
@@ -54,6 +59,23 @@ public class RondoApplication extends Application {
         RondoPreferences rondoPreferences = RondoPreferences.getRondoPreferences();
         state.setApp(rondoPreferences.getApp());
         state.setEnv(rondoPreferences.getEnv());
+    }
+
+    private void initCleverTap() {
+        // Rondo App from Xiaomi console
+        CleverTapAPI.changeXiaomiCredentials("2882303761518843048", "5601884323048");
+        CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
+        CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
+        // Register notification channels
+        Leanplum.onCleverTapInstanceInitialized(cleverTapInstance -> {
+            CleverTapAPI.createNotificationChannel(
+                RondoApplication.this,
+                "YourChannelId",
+                "Your Channel Name",
+                "Your Channel Description",
+                5,
+                true);
+        });
     }
 
     private void initLeanplum() {
@@ -79,21 +101,10 @@ public class RondoApplication extends Application {
         Leanplum.setApiConnectionSettings(env.getApiHostName(), "api", env.getApiSSL());
         Parser.parseVariablesForClasses(VariablesFragment.class);
 
-        // Enable for GCM
-//        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
-
-        initMiPushApp();
-
-        Leanplum.start(this);
-    }
-
-    private void initMiPushApp() {
-        try {
-            Class.forName("com.leanplum.LeanplumMiPushHandler")
-                .getDeclaredMethod("setApplication", String.class, String.class)
-                .invoke(null, "2882303761518843048", "5601884323048"); // TODO Currently Rondo App from Xiaomi console
-        } catch (Throwable ignore) {
-        }
+        Map<String, Object> startAttributes = new HashMap<>();
+        startAttributes.put("startAttributeInt", 1);
+        startAttributes.put("startAttributeString", "stringValueFromStart");
+        Leanplum.start(this, startAttributes);
     }
 
     @Override

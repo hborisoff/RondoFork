@@ -21,7 +21,7 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.leanplum.rondo"
-        minSdkVersion 16
+        minSdkVersion 19 // Xiaomi SDK 5.0.6 needs 19
         targetSdkVersion 31
         versionCode
         versionName "1.0"
@@ -85,16 +85,6 @@ android {
     }
 }
 
-static def isMiPushSupported(version) {
-    // MiPush is supported from 5.6.0
-    int startMajor = 5
-    int startMinor = 6
-    String major = version.split("\\.")[0]
-    String minor = version.split("\\.")[1]
-    return major.toInteger() > startMajor ||
-            (major.toInteger() == startMajor && minor.toInteger() >= startMinor)
-}
-
 static def isHmsSupported(String version) {
     // HMS is supported from 5.9.0
     int startMajor = 5
@@ -131,17 +121,18 @@ dependencies {
 
     //External Dependencies
     implementation "com.google.android.gms:play-services-location:17.0.0"
-    implementation 'com.google.firebase:firebase-messaging:20.2.0' // for FCM
+    implementation 'com.google.firebase:firebase-messaging:20.3.0' // for FCM
+
+    // CleverTap
+    // implementation 'com.google.android.gms:play-services-base:18.1.0'
+    // implementation 'com.android.installreferrer:installreferrer:2.2'
+    implementation "com.clevertap.android:push-templates:1.0.3"
 
     // SDK from released packages (prod flavor)
     prodImplementation "com.leanplum:leanplum-core:${LEANPLUM_SDK_VERSION}"
     prodImplementation "com.leanplum:leanplum-push:${LEANPLUM_SDK_VERSION}"
     prodImplementation "com.leanplum:leanplum-location:${LEANPLUM_SDK_VERSION}"
     prodImplementation "com.leanplum:leanplum-fcm:${LEANPLUM_SDK_VERSION}"
-    if (isMiPushSupported(LEANPLUM_SDK_VERSION)) {
-        println "adding leanplum-mipush dependency"
-        prodImplementation "com.leanplum:leanplum-mipush:${LEANPLUM_SDK_VERSION}"
-    }
     if (isHmsSupported(LEANPLUM_SDK_VERSION)) {
         println "adding leanplum-hms dependency"
         prodImplementation "com.leanplum:leanplum-hms:${LEANPLUM_SDK_VERSION}"
@@ -153,13 +144,14 @@ dependencies {
         devImplementation project(':AndroidSDKPush')
         devImplementation project(':AndroidSDKLocation')
         devImplementation project(':AndroidSDKFcm')
-        if (findProject(':AndroidSDKMiPush') != null) {
-            devImplementation project(':AndroidSDKMiPush')
-        }
         if (findProject(':AndroidSDKHms') != null) {
             devImplementation project(':AndroidSDKHms')
         }
     }
+
+    // Xiaomi from CT SDK for both dev and prod flavors
+    implementation "com.clevertap.android:clevertap-xiaomi-sdk:1.5.0"
+    implementation files("libs/MiPush_SDK_Client_5_0_6-G_3rd.aar")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
