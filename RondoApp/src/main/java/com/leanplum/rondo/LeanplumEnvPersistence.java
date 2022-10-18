@@ -20,6 +20,9 @@ public class LeanplumEnvPersistence {
     private static final String ENV_CT = "ct-dot-ingester.prod.leanplum.com";
     private static final String ENV_CT_SOCKET = "dev.leanplum.com";
 
+    private static final String ENV_RC = "20221017-664f1d3-dot-ingester.prod.leanplum.com";
+    private static final String ENV_RC_SOCKET = "dev.leanplum.com";
+
     private static final int SOCKET_PORT = 443;
     private static final boolean API_USE_SSL = true;
 
@@ -45,98 +48,46 @@ public class LeanplumEnvPersistence {
     }
 
     static public LeanplumEnv production() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        LeanplumEnv env = realm.where(LeanplumEnv.class).
-                equalTo("apiHostName", ENV_PRODUCTION).findFirst();
-        realm.commitTransaction();
-        return env;
+        return find(ENV_PRODUCTION);
     }
 
-    static public LeanplumEnv qa() {
+    static public LeanplumEnv find(String environment) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         LeanplumEnv env = realm.where(LeanplumEnv.class).
-                equalTo("apiHostName", ENV_QA).findFirst();
-        realm.commitTransaction();
-        return env;
-    }
-
-    static public LeanplumEnv staging() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        LeanplumEnv env = realm.where(LeanplumEnv.class).
-                equalTo("apiHostName", ENV_STAGING).findFirst();
-        realm.commitTransaction();
-        return env;
-    }
-
-    static public LeanplumEnv ct() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        LeanplumEnv env = realm.where(LeanplumEnv.class).
-                equalTo("apiHostName", ENV_CT).findFirst();
+            equalTo("apiHostName", environment).findFirst();
         realm.commitTransaction();
         return env;
     }
 
     public static void seedDatabase() {
+        if (find(ENV_PRODUCTION) == null) {
+            seedToDB(ENV_PRODUCTION, ENV_PRODUCTION_SOCKET);
+        }
+        if (find(ENV_QA) == null) {
+            seedToDB(ENV_QA, ENV_QA_SOCKET);
+        }
+        if (find(ENV_STAGING) == null) {
+            seedToDB(ENV_STAGING, ENV_STAGING_SOCKET);
+        }
+        if (find(ENV_CT) == null) {
+            seedToDB(ENV_CT, ENV_CT_SOCKET);
+        }
+        if (find(ENV_RC) == null) {
+            seedToDB(ENV_RC, ENV_RC_SOCKET);
+        }
+    }
+
+    static private void seedToDB(String environment, String socket) {
+        LeanplumEnv env = new LeanplumEnv();
+        env.setApiHostName (environment);
+        env.setApiSSL(API_USE_SSL);
+        env.setSocketHostName(socket);
+        env.setSocketPort(SOCKET_PORT);
+
         Realm realm = Realm.getDefaultInstance();
-        if (production() == null) {
-            realm.beginTransaction();
-            realm.copyToRealm(productionSeed());
-            realm.commitTransaction();
-        }
-        if (qa() == null) {
-            realm.beginTransaction();
-            realm.copyToRealm(qaSeed());
-            realm.commitTransaction();
-        }
-        if (staging() == null) {
-            realm.beginTransaction();
-            realm.copyToRealm(stagingSeed());
-            realm.commitTransaction();
-        }
-        if (ct() == null) {
-            realm.beginTransaction();
-            realm.copyToRealm(ctSeed());
-            realm.commitTransaction();
-        }
-    }
-
-    static private LeanplumEnv productionSeed() {
-        LeanplumEnv env = new LeanplumEnv();
-        env.setApiHostName (ENV_PRODUCTION);
-        env.setApiSSL(API_USE_SSL);
-        env.setSocketHostName(ENV_PRODUCTION_SOCKET);
-        env.setSocketPort(SOCKET_PORT);
-        return env;
-    }
-
-    static private LeanplumEnv qaSeed() {
-        LeanplumEnv env = new LeanplumEnv();
-        env.setApiHostName(ENV_QA);
-        env.setApiSSL(API_USE_SSL);
-        env.setSocketHostName(ENV_QA_SOCKET);
-        env.setSocketPort(SOCKET_PORT);
-        return env;
-    }
-
-    static private LeanplumEnv stagingSeed() {
-        LeanplumEnv env = new LeanplumEnv();
-        env.setApiHostName(ENV_STAGING);
-        env.setApiSSL(API_USE_SSL);
-        env.setSocketHostName(ENV_STAGING_SOCKET);
-        env.setSocketPort(SOCKET_PORT);
-        return env;
-    }
-
-    static private LeanplumEnv ctSeed() {
-        LeanplumEnv env = new LeanplumEnv();
-        env.setApiHostName(ENV_CT);
-        env.setApiSSL(API_USE_SSL);
-        env.setSocketHostName(ENV_CT_SOCKET);
-        env.setSocketPort(SOCKET_PORT);
-        return env;
+        realm.beginTransaction();
+        realm.copyToRealm(env);
+        realm.commitTransaction();
     }
 }
