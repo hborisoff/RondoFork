@@ -85,6 +85,7 @@ object MigrationMethodsContainer {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.setUserAttributes"))
       add(ButtonEntry("setUserAttributes(null)") { text -> Leanplum.setUserAttributes(null) })
+      add(ButtonEntry("setUserAttributes(date-of-birth-DOB)") { text -> Leanplum.setUserAttributes(mapOf("DOB" to Date(89, 11, 31))) })
       add(ButtonEntry("setUserAttributes(one-attribute)") { text -> Leanplum.setUserAttributes(mapOf("param1" to "value1")) })
       add(ButtonEntry("setUserAttributes(all-type-attributes)") { text -> Leanplum.setUserAttributes(createAttributeParams()) })
     }
