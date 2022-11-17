@@ -37,8 +37,8 @@ public class RondoApplication extends Application {
 
         FirebaseApp.initializeApp(this);
 
-        Leanplum.setApplicationContext(this);
         Leanplum.setLogLevel(Level.DEBUG);
+        Leanplum.setApplicationContext(this);
 
         QueueActivityModel.INSTANCE.setListenerEnabled(true);
 

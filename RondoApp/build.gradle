@@ -6,6 +6,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
 def LEANPLUM_SDK_VERSION = System.getenv("LEANPLUM_SDK_VERSION") ?: "7.0.0"
+def LEANPLUM_CT_SDK_VERSION = System.getenv("LEANPLUM_CT_SDK_VERSION") ?: "4.6.6"
 
 ext {
     KEYSTORE_PATH_PROP = 'storeFilePath'
@@ -122,6 +123,9 @@ dependencies {
     //External Dependencies
     implementation "com.google.android.gms:play-services-location:17.0.0"
     implementation 'com.google.firebase:firebase-messaging:20.3.0' // for FCM
+
+    // CleverTap SDK
+    implementation "com.clevertap.android:clevertap-android-sdk:${LEANPLUM_CT_SDK_VERSION}"
 
     // CleverTap
     // implementation 'com.google.android.gms:play-services-base:18.1.0'
