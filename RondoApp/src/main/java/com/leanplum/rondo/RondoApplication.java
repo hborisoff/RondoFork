@@ -37,6 +37,7 @@ public class RondoApplication extends Application {
 
         FirebaseApp.initializeApp(this);
 
+        initCleverTap(); // have all setup done before Leanplum.setApplicationContext, which would initialise CT
         Leanplum.setLogLevel(Level.DEBUG);
         Leanplum.setApplicationContext(this);
 
@@ -50,7 +51,6 @@ public class RondoApplication extends Application {
         LeanplumEnvPersistence.seedDatabase();
 
         setUpInitialAppState();
-        initCleverTap();
         initLeanplum();
     }
 
@@ -67,7 +67,7 @@ public class RondoApplication extends Application {
         CleverTapAPI.enableXiaomiPushOn(PushConstants.XIAOMI_MIUI_DEVICES); // using ALL_DEVICES would spawn ":pushservice" process on non-Xiaomi devices
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
         // Register notification channels
-        Leanplum.onCleverTapInstanceInitialized(cleverTapInstance -> {
+        Leanplum.addCleverTapInstanceCallback(cleverTapInstance -> {
             CleverTapAPI.createNotificationChannel(
                 RondoApplication.this,
                 "YourChannelId",
