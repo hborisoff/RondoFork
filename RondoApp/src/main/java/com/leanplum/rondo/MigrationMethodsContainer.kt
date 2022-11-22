@@ -73,7 +73,7 @@ object MigrationMethodsContainer {
   private fun prepareAdvanceTo() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.advanceTo"))
-      add(ButtonEntry("advanceTo(null)") { text -> Leanplum.advanceTo(null) }) // will be skipped in CT
+      add(ButtonEntry("advanceTo(null)") { Leanplum.advanceTo(null) }) // will be skipped in CT
       add(ButtonEntry("advanceTo(event)") { text -> Leanplum.advanceTo(text) })
       add(ButtonEntry("advanceTo(event info)") { text -> Leanplum.advanceTo(text, "info") })
       add(ButtonEntry("advanceTo(event info one-param)") { text -> Leanplum.advanceTo(text, "info", mapOf("param1" to "value1")) })
@@ -84,10 +84,13 @@ object MigrationMethodsContainer {
   private fun prepareSetUserAttributes() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.setUserAttributes"))
-      add(ButtonEntry("setUserAttributes(null)") { text -> Leanplum.setUserAttributes(null) })
-      add(ButtonEntry("setUserAttributes(date-of-birth-DOB)") { text -> Leanplum.setUserAttributes(mapOf("DOB" to Date(89, 11, 31))) })
-      add(ButtonEntry("setUserAttributes(one-attribute)") { text -> Leanplum.setUserAttributes(mapOf("param1" to "value1")) })
-      add(ButtonEntry("setUserAttributes(all-type-attributes)") { text -> Leanplum.setUserAttributes(createAttributeParams()) })
+      add(ButtonEntry("setUserAttributes(null)") { Leanplum.setUserAttributes(null) })
+      add(ButtonEntry("setUserAttributes(date-of-birth-DOB)") {
+        @Suppress("DEPRECATION")
+        Leanplum.setUserAttributes(mapOf("DOB" to Date(89, 11, 31)))
+      })
+      add(ButtonEntry("setUserAttributes(one-attribute)") { Leanplum.setUserAttributes(mapOf("param1" to "value1")) })
+      add(ButtonEntry("setUserAttributes(all-type-attributes)") { Leanplum.setUserAttributes(createAttributeParams()) })
     }
   }
 
@@ -104,7 +107,7 @@ object MigrationMethodsContainer {
   private fun prepareSetTrafficSourceInfo() {
     buttonEntries.apply {
       add(ButtonEntry("Leanplum.setTrafficSourceInfo"))
-      add(ButtonEntry("setTrafficSourceInfo(all-type-source-info)") { text -> Leanplum.setTrafficSourceInfo(createTrafficSourceInfo()) })
+      add(ButtonEntry("setTrafficSourceInfo(all-type-source-info)") { Leanplum.setTrafficSourceInfo(createTrafficSourceInfo()) })
     }
   }
 }
